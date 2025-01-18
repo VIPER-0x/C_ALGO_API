@@ -1,0 +1,398 @@
+Chart Objects/Drawings
+Introduction¶
+Chart objects (drawings) allow for drawing lines or geometric shapes on cTrader charts. By using them, you can draw patterns or show certain events on charts based on your cBot/indicator data.
+
+Chart objects use X and Y coordinates for positioning.
+
+The X-axis represents the chart time or bar indices.
+The Y-axis is the symbol price.
+All chart objects are derived from the ChartObject base class, meaning that all of them inherit certain base features.
+
+Chart Objects Code Samples¶
+Drawing Inside Indicator Windows¶
+When creating chart objects you are not limited to the 'main' symbol chart. In fact, you can draw chart objects inside any windows containing indicator outputs.
+
+The Chart class has the IndicatorAreas collection. It contains all non-overlay or separate windows in which indicators can display their ouputs.
+
+You can also access your current indicator area by using the IndicatorArea property of your Indicator class.
+
+using cAlgo.API;
+
+namespace NewIndicator
+{
+    [Indicator(IsOverlay = false, AccessRights = AccessRights.None)]
+    public class NewIndicator : Indicator
+    {
+        protected override void Initialize()
+        {
+            var verticalLine = IndicatorArea.DrawVerticalLine("line", Chart.LastVisibleBarIndex, Color.Red);
+        }
+
+        public override void Calculate(int index)
+        {
+        }
+    }
+}
+When you run an instance of the above indicator, you should see a red line in a separate indicator window. When creating charts in separate indicator areas, you can use all drawing methods as both Chart and IndicatorArea inherit from the ChartArea base class.
+
+Static Text¶
+Instead of using X and Y coordinates for positioning, static text uses static horizontal and vertical alignments. To show or draw a static text, use the DrawStaticText() method.
+
+var staticText = Chart.DrawStaticText("static", "This is the text that will be shown", VerticalAlignment.Center, HorizontalAlignment.Center, Color.Red);
+If you attach this chart object to an indicator and run an instance, you will see the following text in the main chart.
+
+Image title
+
+Vertical Lines¶
+Use the DrawVerticalLine() method to draw a vertical line.
+
+var verticalLine = Chart.DrawVerticalLine("line", Chart.LastVisibleBarIndex, Color.Red);
+// Or
+var verticalLine = Chart.DrawVerticalLine("line", Bars.OpenTimes[Chart.LastVisibleBarIndex], Color.Red);
+Horizontal Line¶
+Use the DrawHorizontalLine() method to draw a horizontal line.
+
+/* We use the maximum of the high prices
+of the last ten bars as the Y coordinate. */ 
+var horizontalLine = Chart.DrawHorizontalLine("line", Bars.HighPrices.Maximum(10), Color.Red);
+Trend Line¶
+A trend line starts from a certain point in the chart and ends at another point. Trend lines are useful for creating different shapes or complex patterns.
+
+To draw a trend line use the DrawTrendLine() method.
+
+/* We draw a line from the low price
+ of the first visible bar to the high price
+ of the last visible bar on the chart. */
+var trendLine = Chart.DrawTrendLine("line", Chart.FirstVisibleBarIndex, Bars.LowPrices[Chart.FirstVisibleBarIndex], Chart.LastVisibleBarIndex, Bars.HighPrices[Chart.LastVisibleBarIndex], Color.Red);
+
+// Alternatively, consider the following.
+var trendLine = Chart.DrawTrendLine("line", Bars.OpenTimes[Chart.FirstVisibleBarIndex], Bars.LowPrices[Chart.FirstVisibleBarIndex], Bars.OpenTimes[Chart.LastVisibleBarIndex], Bars.HighPrices[Chart.LastVisibleBarIndex], Color.Red);
+Rectangle¶
+Use the DrawRectangle() method to draw a rectangle.
+
+var rectangle = Chart.DrawRectangle("rectangle", Chart.FirstVisibleBarIndex + 1, Bars.LowPrices[Chart.FirstVisibleBarIndex + 1], Chart.LastVisibleBarIndex, Bars.HighPrices[Chart.LastVisibleBarIndex], Color.Red);
+
+/* We fill the rectangle with a transparent color.
+By using its current color, we only change the alpha
+channel. */
+rectangle.IsFilled = true;
+rectangle.Color = Color.FromArgb(80, rectangle.Color);
+Triangle¶
+Use the DrawTriangle() method to draw a triangle.
+
+var middleX = Chart.FirstVisibleBarIndex + (Chart.LastVisibleBarIndex - Chart.FirstVisibleBarIndex) / 2;
+var middleY = Bars.LowPrices[Chart.FirstVisibleBarIndex] + (Bars.HighPrices[Chart.LastVisibleBarIndex] - Bars.LowPrices[Chart.FirstVisibleBarIndex]) / 2;
+
+var triangle = Chart.DrawTriangle("triangle", Chart.FirstVisibleBarIndex, Bars.LowPrices[Chart.FirstVisibleBarIndex], middleX, middleY, Chart.LastVisibleBarIndex, Bars.LowPrices[Chart.FirstVisibleBarIndex], Color.Red);
+
+// We fill the triangle with a transparent color
+// by using it's current color, we change only the alpha channel
+
+/* We fill the triangle with a transparent color.
+By using its current color, we only change the alpha
+channel. */
+triangle.IsFilled = true;
+triangle.Color = Color.FromArgb(80, triangle.Color);
+Other Chart Objects¶
+For the sake of brevity, we did not mention several other chart objects in the above code snippets. These objects include but are not limited to the following.
+
+Ellipse
+Icon
+Andrews Pitchfork
+Equidistant Channel
+Fibonacci Expansion
+Fibonacci Fan
+Fibonacci Retracement
+All of these objects can be drawn using similarly-named Draw...() methods accepting similar parameters.
+
+Key Object Settings¶
+Naming Chart Objects¶
+Whenever you try to draw a chart object, you have to provide its name as an argument for the draw method.
+
+All chart object names have to be unique. If this requirement is not met, you are risking chart objects overriding chart objects with the same names depending on their execution times. You can use the current bar index value or the current time to generate unique names for each object.
+
+Accessing Chart Objects¶
+All chart objects are contained within the Objects collection. This collection includes user-drawn objects. As a result, the Objects collection can be accessed to remove objects from charts or modify their properties.
+
+The example below accesses the members of the Objects collection.
+
+using cAlgo.API;
+using System.Linq;
+namespace NewIndicator
+{
+    [Indicator(IsOverlay = true, AccessRights = AccessRights.None)]
+    public class NewIndicator : Indicator
+    {
+        protected override void Initialize()
+        {
+            foreach (var chartObject in Chart.Objects)
+            {
+                /* If the object is a trend line 
+                we change its Y1/2 properties */
+                if (chartObject is ChartTrendLine trendLine)
+                {
+                    trendLine.Y1 = Chart.BottomY;
+                    trendLine.Y2 = Chart.TopY;
+                }
+            }
+
+            /* Here, we filter all objects of the 'ChartRectangle'
+            type. */
+            var rectangles = from chartObject in Chart.Objects
+                             where chartObject is ChartRectangle
+                             select chartObject as ChartRectangle;
+
+            /* We select only the chart objects with a name that
+            begins with "MyObjects". */
+            var myObjects = from chartObject in Chart.Objects
+                            where chartObject.Name.StartsWith("MyObjects", System.StringComparison.OrdinalIgnoreCase)
+                            select chartObject;
+
+            /* We select only interactive objects. If an object
+            is interactive, it will not be removed when the 
+            indicator is removed or reloaded. */
+            var interactiveObjects = from chartObject in Chart.Objects
+                                     where chartObject.IsInteractive
+                                     select chartObject;
+
+            /* We remove all objects with a name 
+            that begins with "ToRemove". */
+            var chartObjectsCopy = Chart.Objects.ToArray();
+
+            foreach (var chartObject in chartObjectsCopy)
+            {
+                if (chartObject.Name.StartsWith("ToRemove", System.StringComparison.OrdinalIgnoreCase))
+                {
+                    /* Chart 'RemoveObject' gets the object name
+                    as a parameter. */
+                    Chart.RemoveObject(chartObject.Name);
+                }
+
+            }
+        }
+
+        public override void Calculate(int index)
+        {
+        }
+    }
+}
+Events¶
+Chart objects have several events that you can use to know what objects are drawn, updated, or removed.
+
+ObjectsAdded. This event is triggered when one or more chart objects are added to a chart.
+ObjectsRemoved. This event is triggered when one or more chart objects are removed from a chart.
+ObjectsUpdated. This event is triggered when one or more chart objects are updated (one of their properties is changed by the user or the active indicator/cBot).
+ObjectsSelectionChanged. This event is triggered when one or more chart objects are selected by the user.
+ObjectHoverChanged. This event is triggered when the mouse cursor hovers over a chart object.
+The following example uses all five event types.
+
+using cAlgo.API;
+
+namespace NewIndicator
+{
+    [Indicator(IsOverlay = true, AccessRights = AccessRights.None)]
+    public class NewIndicator : Indicator
+    {
+        protected override void Initialize()
+        {
+            Chart.ObjectsAdded += Chart_ObjectsAdded;
+            Chart.ObjectsRemoved += Chart_ObjectsRemoved;
+            Chart.ObjectsUpdated += Chart_ObjectsUpdated;
+            Chart.ObjectsSelectionChanged += Chart_ObjectsSelectionChanged;
+            Chart.ObjectHoverChanged += Chart_ObjectHoverChanged;
+        }
+
+        private void Chart_ObjectHoverChanged(ChartObjectHoverChangedEventArgs obj) => throw new System.NotImplementedException();
+
+        private void Chart_ObjectsSelectionChanged(ChartObjectsSelectionChangedEventArgs obj) => throw new System.NotImplementedException();
+
+        private void Chart_ObjectsUpdated(ChartObjectsUpdatedEventArgs obj) => throw new System.NotImplementedException();
+
+        private void Chart_ObjectsRemoved(ChartObjectsRemovedEventArgs obj) => throw new System.NotImplementedException();
+
+        private void Chart_ObjectsAdded(ChartObjectsAddedEventArgs obj) => throw new System.NotImplementedException();
+
+        public override void Calculate(int index)
+        {
+        }
+    }
+}
+Interactive / Non-Interactive Objects¶
+When working with interactive objects, users can change their properties such as object position, colour, comment, etc. All user-drawn objects are interactive by default.
+
+Note
+
+The ChartStaticText property cannot be changed regardless of whether its related object is interactive.
+
+To make an object interactive, set its IsInteractive property to true as shown below.
+
+using cAlgo.API;
+
+namespace NewIndicator
+{
+    [Indicator(IsOverlay = true, AccessRights = AccessRights.None)]
+    public class NewIndicator : Indicator
+    {
+        protected override void Initialize()
+        {
+            var verticalLine = Chart.DrawVerticalLine("line", Chart.LastVisibleBarIndex, Color.Red);
+
+            verticalLine.IsInteractive = true;
+        }
+
+        public override void Calculate(int index)
+        {
+        }
+    }
+}
+All chart objects have the IsInteractive property. Its default value is false.
+
+If a chart object is interactive, it will not be removed when an indicator/cBot instance is removed or stopped. In contrast, non-interactive objects are removed automatically when an indicator/cBot stops working.
+
+To avoid clutter, make sure to 'clean' interactive objects after their related instance is removed by using the indicator Destroy or the cBot OnStop methods.
+
+If a chart object is not interactive, it will also be invisible in lists and collections of chart objects.
+
+Locked / Unlocked Objects¶
+Locking a chart object prevents the user from modifying or updating it. You can do so via the Trader 'Chart Properties' box or by setting the IsLocked property to true. The default value is false.
+
+You can use locking to make an object interactive but at the same time prevent the user from updating it. The following example locks a vertical line object.
+
+using cAlgo.API;
+
+namespace NewIndicator
+{
+    [Indicator(IsOverlay = true, AccessRights = AccessRights.None)]
+    public class NewIndicator : Indicator
+    {
+        protected override void Initialize()
+        {
+            var verticalLine = Chart.DrawVerticalLine("line", Chart.LastVisibleBarIndex, Color.Red);
+
+            verticalLine.IsLocked = true;
+        }
+
+        public override void Calculate(int index)
+        {
+        }
+    }
+}
+Show / Hide¶
+You can draw an object on the chart and, subsequently, hide it. While the object will still be present on the chart, it will be completely invisible.
+
+To do so, set the IsHidden property to true.
+
+using cAlgo.API;
+
+namespace NewIndicator
+{
+    [Indicator(IsOverlay = true, AccessRights = AccessRights.None)]
+    public class NewIndicator : Indicator
+    {
+        protected override void Initialize()
+        {
+            var verticalLine = Chart.DrawVerticalLine("line", Chart.LastVisibleBarIndex, Color.Red);
+
+            verticalLine.IsHidden = true;
+        }
+
+        public override void Calculate(int index)
+        {
+        }
+    }
+}
+Resource usage is the primary consideration for using this feature. If there is an object that should frequently appear on the chart (but not all the time), it is better to hide it instead of removing and re-drawing it every time it is needed.
+
+Object Selection/Appearance Index (ZIndex)¶
+Naturally, there may be cases where several objects intersect with each other on a chart, making selecting one specific object difficult or outright impossible. Only the object that was drawn last will be selectable upon hovering your mouse cursor over a group of intersecting chart objects.
+
+To change this behaviour you can use the ZIndex property. It can be helpful when attempting to display complex patterns of chart objects.
+
+using cAlgo.API;
+
+namespace NewIndicator
+{
+    [Indicator(IsOverlay = true, AccessRights = AccessRights.None)]
+    public class NewIndicator : Indicator
+    {
+        protected override void Initialize()
+        {
+            var firstVerticalLine = Chart.DrawVerticalLine("line1", Chart.LastVisibleBarIndex, Color.Red);
+
+            firstVerticalLine.IsInteractive = true;
+
+            var secondVerticalLine = Chart.DrawVerticalLine("line2", Chart.LastVisibleBarIndex, Color.Yellow);
+
+            secondVerticalLine.IsInteractive = true;
+
+            firstVerticalLine.ZIndex = secondVerticalLine.ZIndex + 1;
+        }
+
+        public override void Calculate(int index)
+        {
+        }
+    }
+}
+Once attached to a chart, the above indicator will display a red vertical line rather than a yellow one. As the value of the ZIndex property of the first line is higher than the corresponding value of the second line, it takes precedence over the second (yellow) line.
+
+In other words, the ZIndex property determines which chart objects are displayed first when they overlap. All drawn chart objects are assigned with a certain value for the ZIndex property automatically.
+
+Knowing Whether an Object Is Removed¶
+All chart objects inherit the IsAlive property from the ChartObject base class. The value of this property is true as long as an object is present on the chart (regardless of whether it is visible or invisible). The value is set to false as soon as an object is removed from the chart.
+
+If you save a reference to a chart object and this object is removed by the user, you can check the IsAlive property to check whether an object is 'alive' or 'dead'.
+
+using cAlgo.API;
+
+namespace NewIndicator
+{
+    [Indicator(IsOverlay = true, AccessRights = AccessRights.None)]
+    public class NewIndicator : Indicator
+    {
+        private ChartVerticalLine _verticalLine;
+
+        protected override void Initialize()
+        {
+            _verticalLine = Chart.DrawVerticalLine("line1", Chart.LastVisibleBarIndex, Color.Red);
+            _verticalLine.IsInteractive = true;
+
+            Chart.ObjectsRemoved += Chart_ObjectsRemoved;
+
+            Print(_verticalLine.IsAlive);
+        }
+
+        private void Chart_ObjectsRemoved(ChartObjectsRemovedEventArgs obj)
+        {
+            Print(_verticalLine.IsAlive);
+
+            /* If the object is removed, we should rid of its
+            reference. Otherwise, it will remain in memory. */
+            if (_verticalLine.IsAlive is false)
+            {
+                _verticalLine = null;
+
+                Print("Object reference removed");
+            }
+        }
+
+        public override void Calculate(int index)
+        {
+        }
+    }
+}
+If you run an instance of this indicator, right-click on the red line and remove it. The log should then output the "Object reference removed" message.
+
+If you keep a reference to a 'dead' chart object, a memory leak will occur. During garbage collection, your object will still be considered 'alive', meaning that it will 'survive' the collection process.
+
+To avoid this problem, use the ObjectsRemoved event in combination with the IsAlive property.
+
+Bar Index or Time?¶
+When coding chart objects, you may use either the chart time or the bar index for the X-axis.
+
+In our opinion, chart time is the better option. When using bar indices, you cannot plan for future values (because the required indices do not exist yet) and cannot account for any spaces between bars. However, bar indices may be easier to use, particularly in the case of relatively simple chart objects.
+
+All Chart.Draw methods have different overloads for bar indices and chart time.
+
+January 3, 2025
+ Back to top
+Copyright © 2025 Spotware Systems Ltd. cTrader, cAlgo, cBroker, cMirror. All rights reser

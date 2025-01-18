@@ -1,0 +1,2771 @@
+ChartArea¶
+Summary¶
+The Chart Area Interface.
+
+Signature
+
+public abstract interface ChartArea
+Namespace¶
+cAlgo.API
+
+Methods¶
+AddControl (6)¶
+AddControl (1 of 6)
+
+Summary
+
+Adds a chart control from the Control Base to the main chart area or to the indicator area.
+
+Signature
+
+public abstract void AddControl(ControlBase control)
+Parameters
+
+Name	Type	Description
+control	ControlBase	The control that will be added
+Return Value
+
+void
+
+Related Tutorials
+
+Controls
+AddControl (2 of 6)
+
+Summary
+
+Adds a chart control to chart / indicator area on absolute bar index and price (x,y) coordinates.
+
+Signature
+
+public abstract void AddControl(ControlBase control, int barIndex, double y)
+Parameters
+
+Name	Type	Description
+control	ControlBase	The control that will be added
+barIndex	int	Bar Index
+y	double	Price
+Return Value
+
+void
+
+Related Tutorials
+
+Controls
+AddControl (3 of 6)
+
+Summary
+
+Adds a chart control to chart / indicator area on absolute time and price (x,y) coordinates.
+
+Signature
+
+public abstract void AddControl(ControlBase control, DateTime time, double y)
+Parameters
+
+Name	Type	Description
+control	ControlBase	The control that will be added
+time	DateTime	Time
+y	double	Price
+Return Value
+
+void
+
+Related Tutorials
+
+Controls
+AddControl (4 of 6)
+
+Summary
+
+Adds a chart control to chart / indicator area on absolute time (x) coordinate.
+
+Signature
+
+public abstract void AddControl(ControlBase control, DateTime time)
+Parameters
+
+Name	Type	Description
+control	ControlBase	The control that will be added
+time	DateTime	Time
+Return Value
+
+void
+
+Related Tutorials
+
+Controls
+AddControl (5 of 6)
+
+Summary
+
+Adds a chart control to chart / indicator area on absolute bar index (x) coordinate.
+
+Signature
+
+public abstract void AddControl(ControlBase control, int barIndex)
+Parameters
+
+Name	Type	Description
+control	ControlBase	The control that will be added
+barIndex	int	Bar Index
+Return Value
+
+void
+
+Related Tutorials
+
+Controls
+AddControl (6 of 6)
+
+Summary
+
+Adds a chart control to chart / indicator area on absolute price (y) coordinate.
+
+Signature
+
+public abstract void AddControl(ControlBase control, double y)
+Parameters
+
+Name	Type	Description
+control	ControlBase	The control that will be added
+y	double	Price
+Return Value
+
+void
+
+Related Tutorials
+
+Controls
+RemoveControl¶
+Summary
+
+Remove a chart control from the chart area.
+
+Signature
+
+public abstract void RemoveControl(ControlBase control)
+Parameters
+
+Name	Type	Description
+control	ControlBase	An existing control that will be removed
+Return Value
+
+void
+
+Related Tutorials
+
+Controls
+MoveControl (5)¶
+MoveControl (1 of 5)
+
+Summary
+
+Moves a chart control to chart / indicator area on absolute bar index and price (x,y) coordinates.
+
+Signature
+
+public abstract void MoveControl(ControlBase control, int barIndex, double y)
+Parameters
+
+Name	Type	Description
+control	ControlBase	The control that will be added
+barIndex	int	Bar Index
+y	double	Price
+Return Value
+
+void
+
+MoveControl (2 of 5)
+
+Summary
+
+Moves a chart control to chart / indicator area on absolute time and price (x,y) coordinates.
+
+Signature
+
+public abstract void MoveControl(ControlBase control, DateTime time, double y)
+Parameters
+
+Name	Type	Description
+control	ControlBase	The control that will be added
+time	DateTime	Time
+y	double	Price
+Return Value
+
+void
+
+MoveControl (3 of 5)
+
+Summary
+
+Moves a chart control to chart / indicator area on absolute time (x) coordinate.
+
+Signature
+
+public abstract void MoveControl(ControlBase control, DateTime time)
+Parameters
+
+Name	Type	Description
+control	ControlBase	The control that will be added
+time	DateTime	Time
+Return Value
+
+void
+
+MoveControl (4 of 5)
+
+Summary
+
+Moves a chart control to chart / indicator area on absolute bar index (x) coordinate.
+
+Signature
+
+public abstract void MoveControl(ControlBase control, int barIndex)
+Parameters
+
+Name	Type	Description
+control	ControlBase	The control that will be added
+barIndex	int	Bar Index
+Return Value
+
+void
+
+MoveControl (5 of 5)
+
+Summary
+
+Moves a chart control to chart / indicator area on absolute price (y) coordinate.
+
+Signature
+
+public abstract void MoveControl(ControlBase control, double y)
+Parameters
+
+Name	Type	Description
+control	ControlBase	The control that will be added
+y	double	Price
+Return Value
+
+void
+
+SetYRange¶
+Summary
+
+Sets the Y-axis lowest and highest values range. Allows scrolling the chart by the Y-axis. If only one of thevalues is set, then the chart will be expanded regarding the lowest or highest value respectively.
+
+Signature
+
+public abstract void SetYRange(double bottomY, double topY)
+Parameters
+
+Name	Type	Description
+bottomY	double	The lowest visible Y-axis value.
+topY	double	The highest visible Y-axis value.
+Return Value
+
+void
+
+FindAllObjects (2)¶
+FindAllObjects (1 of 2)
+
+Summary
+
+Finds all the chart objects of the specified type.
+
+Signature
+
+public abstract T[] FindAllObjects()
+Return Value
+
+T[]
+
+FindAllObjects (2 of 2)
+
+Summary
+
+Finds all the chart objects of the specified type.
+
+Signature
+
+public abstract ChartObject[] FindAllObjects(ChartObjectType objectType)
+Parameters
+
+Name	Type	Description
+objectType	ChartObjectType	Type of the object.
+Return Value
+
+ChartObject[]
+
+FindObject¶
+Summary
+
+Finds the chart object of the specified name.
+
+Signature
+
+public abstract ChartObject FindObject(string objectName)
+Parameters
+
+Name	Type	Description
+objectName	string	The name of the object.
+Return Value
+
+ChartObject
+
+Examples
+
+ // Draw a horizontal line.
+ Chart.DrawHorizontalLine("hLine", Symbol.Ask, Color.Red);
+ // Find the line that was drawn.
+ var obj = Chart.FindObject("hLine");
+ Print("Found object with name {0}", obj.Name);
+RemoveObject¶
+Summary
+
+Removes the chart object of the specified name.
+
+Signature
+
+public abstract void RemoveObject(string objectName)
+Parameters
+
+Name	Type	Description
+objectName	string	The name of the object.
+Return Value
+
+void
+
+RemoveAllObjects¶
+Summary
+
+Removes all interactive and non-interactive objects available for the cBot or Indicator.
+
+Signature
+
+public abstract void RemoveAllObjects()
+Return Value
+
+void
+
+DrawHorizontalLine (3)¶
+DrawHorizontalLine (1 of 3)
+
+Summary
+
+Draws a horizontal line.
+
+Signature
+
+public abstract ChartHorizontalLine DrawHorizontalLine(string name, double y, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once on a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+y	double	The Y-axis value of the line location.
+color	Color	The line color.
+Return Value
+
+ChartHorizontalLine
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawHorizontalLine (2 of 3)
+
+Summary
+
+Draws a horizontal line.
+
+Signature
+
+public abstract ChartHorizontalLine DrawHorizontalLine(string name, double y, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+y	double	The Y-axis value of the line location.
+color	Color	The line color.
+thickness	int	The line thickness.
+Return Value
+
+ChartHorizontalLine
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawHorizontalLine (3 of 3)
+
+Summary
+
+Draws a horizontal line.
+
+Signature
+
+public abstract ChartHorizontalLine DrawHorizontalLine(string name, double y, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+y	double	The Y-axis value of the line location.
+color	Color	The line color.
+thickness	int	The line thickness.
+lineStyle	LineStyle	The line style.
+Return Value
+
+ChartHorizontalLine
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawVerticalLine (6)¶
+DrawVerticalLine (1 of 6)
+
+Summary
+
+Draws a vertical line.
+
+Signature
+
+public abstract ChartVerticalLine DrawVerticalLine(string name, DateTime time, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time	DateTime	The time value on the X-axis.
+color	Color	The line color.
+Return Value
+
+ChartVerticalLine
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawVerticalLine (2 of 6)
+
+Summary
+
+Draws a vertical line.
+
+Signature
+
+public abstract ChartVerticalLine DrawVerticalLine(string name, DateTime time, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time	DateTime	The time value of the line location on the X-axis.
+color	Color	The line color.
+thickness	int	The line thickness.
+Return Value
+
+ChartVerticalLine
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawVerticalLine (3 of 6)
+
+Summary
+
+Draws a vertical line.
+
+Signature
+
+public abstract ChartVerticalLine DrawVerticalLine(string name, DateTime time, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time	DateTime	The time value of the line location on the X-axis.
+color	Color	The line color.
+thickness	int	The line thickness.
+lineStyle	LineStyle	The line style.
+Return Value
+
+ChartVerticalLine
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawVerticalLine (4 of 6)
+
+Summary
+
+Draws a vertical line.
+
+Signature
+
+public abstract ChartVerticalLine DrawVerticalLine(string name, int barIndex, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex	int	The bar index of the line location on the X-axis.
+color	Color	The line color.
+Return Value
+
+ChartVerticalLine
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawVerticalLine (5 of 6)
+
+Summary
+
+Draws a vertical line.
+
+Signature
+
+public abstract ChartVerticalLine DrawVerticalLine(string name, int barIndex, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex	int	The bar index of the line location on the X-axis.
+color	Color	The line color.
+thickness	int	The line thickness.
+Return Value
+
+ChartVerticalLine
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawVerticalLine (6 of 6)
+
+Summary
+
+Draws a vertical line.
+
+Signature
+
+public abstract ChartVerticalLine DrawVerticalLine(string name, int barIndex, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex	int	The bar index of the line location on the X-axis.
+color	Color	The line color.
+thickness	int	The line thickness.
+lineStyle	LineStyle	The line style.
+Return Value
+
+ChartVerticalLine
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawTrendLine (6)¶
+DrawTrendLine (1 of 6)
+
+Summary
+
+Draws a trend line.
+
+Signature
+
+public abstract ChartTrendLine DrawTrendLine(string name, DateTime time1, double y1, DateTime time2, double y2, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the trend line start point location on the X-axis.
+y1	double	The Y-axis value of the trend line start location.
+time2	DateTime	The time value of the trend line end point location on the X-axis.
+y2	double	The Y-axis value of the trend line end location.
+color	Color	The color of the trend line.
+Return Value
+
+ChartTrendLine
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawTrendLine (2 of 6)
+
+Summary
+
+Draws a trend line.
+
+Signature
+
+public abstract ChartTrendLine DrawTrendLine(string name, DateTime time1, double y1, DateTime time2, double y2, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the trend line start point location on the X-axis.
+y1	double	The Y-axis value of the trend line start location.
+time2	DateTime	The time value of the trend line end point location on the X-axis.
+y2	double	The Y-axis value of the trend line end location.
+color	Color	The color of the trend line.
+thickness	int	The thickness of the trend line.
+Return Value
+
+ChartTrendLine
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawTrendLine (3 of 6)
+
+Summary
+
+Draws a trend line.
+
+Signature
+
+public abstract ChartTrendLine DrawTrendLine(string name, DateTime time1, double y1, DateTime time2, double y2, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the trend line start point location on the X-axis.
+y1	double	The Y-axis value of the trend line start location.
+time2	DateTime	The time value of the trend line end point location on the X-axis.
+y2	double	The Y-axis value of the trend line end location.
+color	Color	The color of the trend line.
+thickness	int	The thickness of the trend line.
+lineStyle	LineStyle	The trend line style.
+Return Value
+
+ChartTrendLine
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawTrendLine (4 of 6)
+
+Summary
+
+Draws a trend line.
+
+Signature
+
+public abstract ChartTrendLine DrawTrendLine(string name, int barIndex1, double y1, int barIndex2, double y2, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the trend line start point location on the X-axis.
+y1	double	The Y-axis value of the trend line start location.
+barIndex2	int	The bar index of the trend line end point location on the X-axis.
+y2	double	The Y-axis value of the trend line end location.
+color	Color	The color of the trend line.
+Return Value
+
+ChartTrendLine
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawTrendLine (5 of 6)
+
+Summary
+
+Draws a trend line.
+
+Signature
+
+public abstract ChartTrendLine DrawTrendLine(string name, int barIndex1, double y1, int barIndex2, double y2, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the trend line start point location on the X-axis.
+y1	double	The Y-axis value of the trend line start location.
+barIndex2	int	The bar index of the trend line end point location on the X-axis.
+y2	double	The Y-axis value of the trend line end location.
+color	Color	The color of the trend line.
+thickness	int	The thickness of the trend line.
+Return Value
+
+ChartTrendLine
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawTrendLine (6 of 6)
+
+Summary
+
+Draws a trend line.
+
+Signature
+
+public abstract ChartTrendLine DrawTrendLine(string name, int barIndex1, double y1, int barIndex2, double y2, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the trend line start point location on the X-axis.
+y1	double	The Y-axis value of the trend line start location.
+barIndex2	int	The bar index of the trend line end point location on the X-axis.
+y2	double	The Y-axis value of the trend line end location.
+color	Color	The color of the trend line.
+thickness	int	The thickness of the trend line.
+lineStyle	LineStyle	The trend line style.
+Return Value
+
+ChartTrendLine
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawEquidistantChannel (6)¶
+DrawEquidistantChannel (1 of 6)
+
+Summary
+
+Draws an equidistant channel.
+
+Signature
+
+public abstract ChartEquidistantChannel DrawEquidistantChannel(string name, DateTime time1, double y1, DateTime time2, double y2, double channelHeight, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the equidistant channel start point location on the X-axis.
+y1	double	The Y-axis value of the equidistant channel start location.
+time2	DateTime	The time value of the equidistant channel end point location on the X-axis.
+y2	double	The Y-axis value of the equidistant channel end location.
+channelHeight	double	The equidistant channel hight in pips.
+color	Color	The color of the equidistant channel lines.
+Return Value
+
+ChartEquidistantChannel
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawEquidistantChannel (2 of 6)
+
+Summary
+
+Draws an equidistant channel.
+
+Signature
+
+public abstract ChartEquidistantChannel DrawEquidistantChannel(string name, DateTime time1, double y1, DateTime time2, double y2, double channelHeight, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the equidistant channel start point location on the X-axis.
+y1	double	The Y-axis value of the equidistant channel start location.
+time2	DateTime	The time value of the equidistant channel end point location on the X-axis.
+y2	double	The Y-axis value of the equidistant channel end location.
+channelHeight	double	The equidistant channel hight in pips.
+color	Color	The color of the equidistant channel lines.
+thickness	int	The thickness of the equidistant channel lines.
+Return Value
+
+ChartEquidistantChannel
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawEquidistantChannel (3 of 6)
+
+Summary
+
+Draws an equidistant channel.
+
+Signature
+
+public abstract ChartEquidistantChannel DrawEquidistantChannel(string name, DateTime time1, double y1, DateTime time2, double y2, double channelHeight, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the equidistant channel start point location on the X-axis.
+y1	double	The Y-axis value of the equidistant channel start location.
+time2	DateTime	The time value of the equidistant channel end point location on the X-axis.
+y2	double	The Y-axis value of the equidistant channel end location.
+channelHeight	double	The equidistant channel hight in pips.
+color	Color	The color of the equidistant channel lines.
+thickness	int	The thickness of the equidistant channel lines.
+lineStyle	LineStyle	The equidistant channel lines style.
+Return Value
+
+ChartEquidistantChannel
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawEquidistantChannel (4 of 6)
+
+Summary
+
+Draws an equidistant channel.
+
+Signature
+
+public abstract ChartEquidistantChannel DrawEquidistantChannel(string name, int barIndex1, double y1, int barIndex2, double y2, double channelHeight, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the equidistant channel start point location on the X-axis.
+y1	double	The Y-axis value of the equidistant channel start location.
+barIndex2	int	The bar index of the equidistant channel end point location on the X-axis.
+y2	double	The Y-axis value of the equidistant channel end location.
+channelHeight	double	The equidistant channel hight in pips.
+color	Color	The color of the equidistant channel lines.
+Return Value
+
+ChartEquidistantChannel
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawEquidistantChannel (5 of 6)
+
+Summary
+
+Draws an equidistant channel.
+
+Signature
+
+public abstract ChartEquidistantChannel DrawEquidistantChannel(string name, int barIndex1, double y1, int barIndex2, double y2, double channelHeight, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the equidistant channel start point location on the X-axis.
+y1	double	The Y-axis value of the equidistant channel start location.
+barIndex2	int	The bar index of the equidistant channel end point location on the X-axis.
+y2	double	The Y-axis value of the equidistant channel end location.
+channelHeight	double	The equidistant channel hight in pips.
+color	Color	The color of the equidistant channel lines.
+thickness	int	The thickness of the equidistant channel lines.
+Return Value
+
+ChartEquidistantChannel
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawEquidistantChannel (6 of 6)
+
+Summary
+
+Draws an equidistant channel.
+
+Signature
+
+public abstract ChartEquidistantChannel DrawEquidistantChannel(string name, int barIndex1, double y1, int barIndex2, double y2, double channelHeight, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the equidistant channel start point location on the X-axis.
+y1	double	The Y-axis value of the equidistant channel start location.
+barIndex2	int	The bar index of the equidistant channel end point location on the X-axis.
+y2	double	The Y-axis value of the equidistant channel end location.
+channelHeight	double	The equidistant channel hight in pips.
+color	Color	The color of the equidistant channel lines.
+thickness	int	The thickness of the equidistant channel lines.
+lineStyle	LineStyle	The equidistant channel lines style.
+Return Value
+
+ChartEquidistantChannel
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawText (2)¶
+DrawText (1 of 2)
+
+Summary
+
+Draws the text.
+
+Signature
+
+public abstract ChartText DrawText(string name, string text, DateTime time, double y, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+text	string	The text content.
+time	DateTime	The time value of the text object location on the X-axis.
+y	double	The Y-axis value of the text object location.
+color	Color	The color of the text.
+Return Value
+
+ChartText
+
+Examples
+
+ // Draw the text on the last bar high.
+ var highPrice = MarketSeries.High.LastValue;
+ var openTime = MarketSeries.OpenTime.LastValue;
+ var text = Chart.DrawText("text1", "High is here", openTime, highPrice, Color.Red);
+ text.VerticalAlignment = VerticalAlignment.Bottom;
+ text.HorizontalAlignment = HorizontalAlignment.Center;
+Related Tutorials
+
+Chart Objects/Drawings
+DrawText (2 of 2)
+
+Summary
+
+Draws the text.
+
+Signature
+
+public abstract ChartText DrawText(string name, string text, int barIndex, double y, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+text	string	The text content.
+barIndex	int	The bar index of the text object location on the X-axis.
+y	double	The Y-axis value of the text object location.
+color	Color	The color of the text.
+Return Value
+
+ChartText
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawStaticText¶
+Summary
+
+Draws the static text.
+
+Signature
+
+public abstract ChartStaticText DrawStaticText(string name, string text, VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+text	string	The text content.
+verticalAlignment	VerticalAlignment	The vertical alignment.
+horizontalAlignment	HorizontalAlignment	The horizontal alignment.
+color	Color	The color of the text.
+Return Value
+
+ChartStaticText
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawIcon (2)¶
+DrawIcon (1 of 2)
+
+Summary
+
+Draws an icon.
+
+Signature
+
+public abstract ChartIcon DrawIcon(string name, ChartIconType iconType, DateTime time, double y, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+iconType	ChartIconType	The type of the icon.
+time	DateTime	The time value of the icon location on the X-axis.
+y	double	The Y-axis value of the icon location.
+color	Color	The color of the icon.
+Return Value
+
+ChartIcon
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawIcon (2 of 2)
+
+Summary
+
+Draws an icon.
+
+Signature
+
+public abstract ChartIcon DrawIcon(string name, ChartIconType iconType, int barIndex, double y, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+iconType	ChartIconType	Type of the icon.
+barIndex	int	The bar index of the icon location on the X-axis.
+y	double	The Y-axis value of the icon location.
+color	Color	The color of the icon.
+Return Value
+
+ChartIcon
+
+Examples
+
+ // Draw an icon on the last bar high.
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciRetracement (6)¶
+DrawFibonacciRetracement (1 of 6)
+
+Summary
+
+Draws a Fibonacci retracement.
+
+Signature
+
+public abstract ChartFibonacciRetracement DrawFibonacciRetracement(string name, DateTime time1, double y1, DateTime time2, double y2, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the Fibonacci retracement start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci retracement start point location.
+time2	DateTime	The time value of the Fibonacci retracement end point location on the X-axis.
+y2	double	The Y-axis value of the Fibonacci retracement end point location.
+color	Color	The Fibonacci retracement lines color.
+Return Value
+
+ChartFibonacciRetracement
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciRetracement (2 of 6)
+
+Summary
+
+Draws a Fibonacci retracement.
+
+Signature
+
+public abstract ChartFibonacciRetracement DrawFibonacciRetracement(string name, DateTime time1, double y1, DateTime time2, double y2, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the Fibonacci retracement start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci retracement start point location.
+time2	DateTime	The time value of the Fibonacci retracement end point location on the X-axis.
+y2	double	The Y-axis value of the Fibonacci retracement end point location.
+color	Color	The Fibonacci retracement lines color.
+thickness	int	The Fibonacci retracement lines thickness.
+Return Value
+
+ChartFibonacciRetracement
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciRetracement (3 of 6)
+
+Summary
+
+Draws a Fibonacci retracement.
+
+Signature
+
+public abstract ChartFibonacciRetracement DrawFibonacciRetracement(string name, DateTime time1, double y1, DateTime time2, double y2, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the Fibonacci retracement start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci retracement start point location.
+time2	DateTime	The time value of the Fibonacci retracement end point location on the X-axis.
+y2	double	The Y-axis value of the Fibonacci retracement end point location.
+color	Color	The Fibonacci retracement lines color.
+thickness	int	The Fibonacci retracement lines thickness.
+lineStyle	LineStyle	The Fibonacci retracement lines style.
+Return Value
+
+ChartFibonacciRetracement
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciRetracement (4 of 6)
+
+Summary
+
+Draws a Fibonacci retracement.
+
+Signature
+
+public abstract ChartFibonacciRetracement DrawFibonacciRetracement(string name, int barIndex1, double y1, int barIndex2, double y2, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the Fibonacci retracement start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci retracement start point location.
+barIndex2	int	The bar index of the Fibonacci retracement end point location on the X-axis.
+y2	double	The Y-axis value of the Fibonacci retracement end point location.
+color	Color	The Fibonacci retracement lines color.
+Return Value
+
+ChartFibonacciRetracement
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciRetracement (5 of 6)
+
+Summary
+
+Draws a Fibonacci retracement.
+
+Signature
+
+public abstract ChartFibonacciRetracement DrawFibonacciRetracement(string name, int barIndex1, double y1, int barIndex2, double y2, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the Fibonacci retracement start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci retracement start point location.
+barIndex2	int	The bar index of the Fibonacci retracement end point location on the X-axis.
+y2	double	The Y-axis value of the Fibonacci retracement end point location.
+color	Color	The Fibonacci retracement lines color.
+thickness	int	The Fibonacci retracement lines thickness.
+Return Value
+
+ChartFibonacciRetracement
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciRetracement (6 of 6)
+
+Summary
+
+Draws a Fibonacci retracement.
+
+Signature
+
+public abstract ChartFibonacciRetracement DrawFibonacciRetracement(string name, int barIndex1, double y1, int barIndex2, double y2, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the Fibonacci retracement start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci retracement start point location.
+barIndex2	int	The bar index of the Fibonacci retracement end point location on the X-axis.
+y2	double	The Y-axis value of the Fibonacci retracement end point location.
+color	Color	The Fibonacci retracement lines color.
+thickness	int	The Fibonacci retracement lines thickness.
+lineStyle	LineStyle	The Fibonacci retracement lines style.
+Return Value
+
+ChartFibonacciRetracement
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciExpansion (6)¶
+DrawFibonacciExpansion (1 of 6)
+
+Summary
+
+Draws a Fibonacci expansion.
+
+Signature
+
+public abstract ChartFibonacciExpansion DrawFibonacciExpansion(string name, DateTime time1, double y1, DateTime time2, double y2, DateTime time3, double y3, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the Fibonacci expansion start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci expansion start point location.
+time2	DateTime	The time value of the Fibonacci expansion central point location on the X-axis.
+y2	double	The Y-axis value of the Fibonacci expansion central point location.
+time3	DateTime	The time value of the Fibonacci expansion end point location on the X-axis.
+y3	double	The Y-axis value of the Fibonacci expansion end point location.
+color	Color	The Fibonacci expansion lines color.
+Return Value
+
+ChartFibonacciExpansion
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciExpansion (2 of 6)
+
+Summary
+
+Draws a Fibonacci expansion.
+
+Signature
+
+public abstract ChartFibonacciExpansion DrawFibonacciExpansion(string name, DateTime time1, double y1, DateTime time2, double y2, DateTime time3, double y3, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the Fibonacci expansion start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci expansion start point location.
+time2	DateTime	The time value of the Fibonacci expansion central point location on the X-axis.
+y2	double	The Y-axis value of the Fibonacci expansion central point location.
+time3	DateTime	The time value of the Fibonacci expansion end point location on the X-axis.
+y3	double	The Y-axis value of the Fibonacci expansion end point location.
+color	Color	The Fibonacci expansion lines color.
+thickness	int	The Fibonacci expansion lines thickness.
+Return Value
+
+ChartFibonacciExpansion
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciExpansion (3 of 6)
+
+Summary
+
+Draws a Fibonacci expansion.
+
+Signature
+
+public abstract ChartFibonacciExpansion DrawFibonacciExpansion(string name, DateTime time1, double y1, DateTime time2, double y2, DateTime time3, double y3, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the Fibonacci expansion start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci expansion start point location.
+time2	DateTime	The time value of the Fibonacci expansion central point location on the X-axis.
+y2	double	The Y-axis value of the Fibonacci expansion central point location.
+time3	DateTime	The time value of the Fibonacci expansion end point location on the X-axis.
+y3	double	The Y-axis value of the Fibonacci expansion end point location.
+color	Color	The Fibonacci expansion lines color.
+thickness	int	The Fibonacci expansion lines thickness.
+lineStyle	LineStyle	The Fibonacci expansion lines style.
+Return Value
+
+ChartFibonacciExpansion
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciExpansion (4 of 6)
+
+Summary
+
+Draws a Fibonacci expansion.
+
+Signature
+
+public abstract ChartFibonacciExpansion DrawFibonacciExpansion(string name, int barIndex1, double y1, int barIndex2, double y2, int barIndex3, double y3, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the Fibonacci expansion start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci expansion start point location.
+barIndex2	int	The bar index of the Fibonacci expansion central point location on the X-axis.
+y2	double	The Y-axis value of the Fibonacci expansion central point location.
+barIndex3	int	The bar index of the Fibonacci expansion end point location on the X-axis.
+y3	double	The Y-axis value of the Fibonacci expansion end point location.
+color	Color	The Fibonacci expansion lines color.
+Return Value
+
+ChartFibonacciExpansion
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciExpansion (5 of 6)
+
+Summary
+
+Draws a Fibonacci expansion.
+
+Signature
+
+public abstract ChartFibonacciExpansion DrawFibonacciExpansion(string name, int barIndex1, double y1, int barIndex2, double y2, int barIndex3, double y3, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the Fibonacci expansion start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci expansion start point location.
+barIndex2	int	The bar index of the Fibonacci expansion central point location on the X-axis.
+y2	double	The Y-axis value of the Fibonacci expansion central point location.
+barIndex3	int	The bar index of the Fibonacci expansion end point location on the X-axis.
+y3	double	The Y-axis value of the Fibonacci expansion end point location.
+color	Color	The Fibonacci expansion lines color.
+thickness	int	The Fibonacci expansion lines thickness.
+Return Value
+
+ChartFibonacciExpansion
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciExpansion (6 of 6)
+
+Summary
+
+Draws a Fibonacci expansion.
+
+Signature
+
+public abstract ChartFibonacciExpansion DrawFibonacciExpansion(string name, int barIndex1, double y1, int barIndex2, double y2, int barIndex3, double y3, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the Fibonacci expansion start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci expansion start point location.
+barIndex2	int	The bar index of the Fibonacci expansion central point location on the X-axis.
+y2	double	The Y-axis value of the Fibonacci expansion central point location.
+barIndex3	int	The bar index of the Fibonacci expansion end point location on the X-axis.
+y3	double	The Y-axis value of the Fibonacci expansion end point location.
+color	Color	The Fibonacci expansion lines color.
+thickness	int	The Fibonacci expansion lines thickness.
+lineStyle	LineStyle	The Fibonacci expansion lines style.
+Return Value
+
+ChartFibonacciExpansion
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciFan (6)¶
+DrawFibonacciFan (1 of 6)
+
+Summary
+
+Draws a Fibonacci fan.
+
+Signature
+
+public abstract ChartFibonacciFan DrawFibonacciFan(string name, DateTime time1, double y1, DateTime time2, double y2, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the Fibonacci fan start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci fan start point location.
+time2	DateTime	The time value of the Fibonacci fan end point location on the X-axis.
+y2	double	The Y-axis value of the Fibonacci fan end point location.
+color	Color	The Fibonacci fan lines color.
+Return Value
+
+ChartFibonacciFan
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciFan (2 of 6)
+
+Summary
+
+Draws a Fibonacci fan.
+
+Signature
+
+public abstract ChartFibonacciFan DrawFibonacciFan(string name, DateTime time1, double y1, DateTime time2, double y2, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the Fibonacci fan start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci fan start point location.
+time2	DateTime	The time value of the Fibonacci fan end point location on the X-axis.
+y2	double	The Y-axis value of the Fibonacci fan end point location.
+color	Color	The Fibonacci fan lines color.
+thickness	int	The Fibonacci fan lines thickness.
+Return Value
+
+ChartFibonacciFan
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciFan (3 of 6)
+
+Summary
+
+Draws a Fibonacci fan.
+
+Signature
+
+public abstract ChartFibonacciFan DrawFibonacciFan(string name, DateTime time1, double y1, DateTime time2, double y2, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the Fibonacci fan start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci fan start point location.
+time2	DateTime	The time value of the Fibonacci fan end point location on the X-axis.
+y2	double	The Y-axis value of the Fibonacci fan end point location.
+color	Color	The Fibonacci fan lines color.
+thickness	int	The Fibonacci fan lines thickness.
+lineStyle	LineStyle	The Fibonacci fan lines style.
+Return Value
+
+ChartFibonacciFan
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciFan (4 of 6)
+
+Summary
+
+Draws a Fibonacci fan.
+
+Signature
+
+public abstract ChartFibonacciFan DrawFibonacciFan(string name, int barIndex1, double y1, int barIndex2, double y2, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the Fibonacci fan start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci fan start point location.
+barIndex2	int	The Y-axis value of the Fibonacci fan end point location.
+y2	double	The Y-axis value of the Fibonacci fan end point location.
+color	Color	The Fibonacci fan lines color.
+Return Value
+
+ChartFibonacciFan
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciFan (5 of 6)
+
+Summary
+
+Draws a Fibonacci fan.
+
+Signature
+
+public abstract ChartFibonacciFan DrawFibonacciFan(string name, int barIndex1, double y1, int barIndex2, double y2, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the Fibonacci fan start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci fan start point location.
+barIndex2	int	The Y-axis value of the Fibonacci fan end point location.
+y2	double	The Y-axis value of the Fibonacci fan end point location.
+color	Color	The Fibonacci fan lines color.
+thickness	int	The Fibonacci fan lines thickness.
+Return Value
+
+ChartFibonacciFan
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciFan (6 of 6)
+
+Summary
+
+Draws a Fibonacci fan.
+
+Signature
+
+public abstract ChartFibonacciFan DrawFibonacciFan(string name, int barIndex1, double y1, int barIndex2, double y2, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the Fibonacci fan start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci fan start point location.
+barIndex2	int	The Y-axis value of the Fibonacci fan end point location.
+y2	double	The Y-axis value of the Fibonacci fan end point location.
+color	Color	The Fibonacci fan lines color.
+thickness	int	The Fibonacci fan lines thickness.
+lineStyle	LineStyle	The Fibonacci fan lines style.
+Return Value
+
+ChartFibonacciFan
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciTimezones (6)¶
+DrawFibonacciTimezones (1 of 6)
+
+Summary
+
+Draws a Fibonacci timezones.
+
+Signature
+
+public abstract ChartFibonacciTimezones DrawFibonacciTimezones(string name, DateTime time1, double y1, DateTime time2, double y2, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the Fibonacci timezones start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci timezones start point location.
+time2	DateTime	The time value of the Fibonacci timezones end point location on the X-axis.
+y2	double	The Y-axis value of the Fibonacci timezones end point location.
+color	Color	The Fibonacci timezones lines color.
+Return Value
+
+ChartFibonacciTimezones
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciTimezones (2 of 6)
+
+Summary
+
+Draws a Fibonacci timezones.
+
+Signature
+
+public abstract ChartFibonacciTimezones DrawFibonacciTimezones(string name, DateTime time1, double y1, DateTime time2, double y2, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the Fibonacci timezones start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci timezones start point location.
+time2	DateTime	The time value of the Fibonacci timezones end point location on the X-axis.
+y2	double	The Y-axis value of the Fibonacci timezones end point location.
+color	Color	The Fibonacci timezones lines color.
+thickness	int	The Fibonacci timezones lines thickness.
+Return Value
+
+ChartFibonacciTimezones
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciTimezones (3 of 6)
+
+Summary
+
+Draws a Fibonacci timezones.
+
+Signature
+
+public abstract ChartFibonacciTimezones DrawFibonacciTimezones(string name, DateTime time1, double y1, DateTime time2, double y2, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the Fibonacci timezones start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci timezones start point location.
+time2	DateTime	The time value of the Fibonacci timezones end point location on the X-axis.
+y2	double	The Y-axis value of the Fibonacci timezones end point location.
+color	Color	The Fibonacci timezones lines color.
+thickness	int	The Fibonacci timezones lines thickness.
+lineStyle	LineStyle	The Fibonacci timezones lines style.
+Return Value
+
+ChartFibonacciTimezones
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciTimezones (4 of 6)
+
+Summary
+
+Draws a Fibonacci timezones.
+
+Signature
+
+public abstract ChartFibonacciTimezones DrawFibonacciTimezones(string name, int barIndex1, double y1, int barIndex2, double y2, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the Fibonacci timezones start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci timezones start point location.
+barIndex2	int	The Y-axis value of the Fibonacci timezones end point location.
+y2	double	The Y-axis value of the Fibonacci timezones end point location.
+color	Color	The Fibonacci timezones lines color.
+Return Value
+
+ChartFibonacciTimezones
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciTimezones (5 of 6)
+
+Summary
+
+Draws a Fibonacci timezones.
+
+Signature
+
+public abstract ChartFibonacciTimezones DrawFibonacciTimezones(string name, int barIndex1, double y1, int barIndex2, double y2, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the Fibonacci timezones start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci timezones start point location.
+barIndex2	int	The Y-axis value of the Fibonacci timezones end point location.
+y2	double	The Y-axis value of the Fibonacci timezones end point location.
+color	Color	The Fibonacci timezones lines color.
+thickness	int	The Fibonacci timezones lines thickness.
+Return Value
+
+ChartFibonacciTimezones
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawFibonacciTimezones (6 of 6)
+
+Summary
+
+Draws a Fibonacci timezones.
+
+Signature
+
+public abstract ChartFibonacciTimezones DrawFibonacciTimezones(string name, int barIndex1, double y1, int barIndex2, double y2, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the Fibonacci timezones start point location on the X-axis.
+y1	double	The Y-axis value of the Fibonacci timezones start point location.
+barIndex2	int	The Y-axis value of the Fibonacci timezones end point location.
+y2	double	The Y-axis value of the Fibonacci timezones end point location.
+color	Color	The Fibonacci timezones lines color.
+thickness	int	The Fibonacci timezones lines thickness.
+lineStyle	LineStyle	The Fibonacci timezones lines style.
+Return Value
+
+ChartFibonacciTimezones
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawAndrewsPitchfork (6)¶
+DrawAndrewsPitchfork (1 of 6)
+
+Summary
+
+Draws an Andrew's pitchfork.
+
+Signature
+
+public abstract ChartAndrewsPitchfork DrawAndrewsPitchfork(string name, DateTime time1, double y1, DateTime time2, double y2, DateTime time3, double y3, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the Andrew's pitchfork point 1 location on the X-axis.
+y1	double	The Y-axis value of the Andrew's pitchfork point 1 location.
+time2	DateTime	The time value of the Andrew's pitchfork point 2 location on the X-axis.
+y2	double	The Y-axis value of the Andrew's pitchfork point 2 location.
+time3	DateTime	The time value of the Andrew's pitchfork point 3 location on the X-axis.
+y3	double	The Y-axis value of the Andrew's pitchfork point 3 location.
+color	Color	The Andrew's pitchfork lines color.
+Return Value
+
+ChartAndrewsPitchfork
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawAndrewsPitchfork (2 of 6)
+
+Summary
+
+Draws an Andrew's pitchfork.
+
+Signature
+
+public abstract ChartAndrewsPitchfork DrawAndrewsPitchfork(string name, DateTime time1, double y1, DateTime time2, double y2, DateTime time3, double y3, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the Andrew's pitchfork point 1 location on the X-axis.
+y1	double	The Y-axis value of the Andrew's pitchfork point 1 location.
+time2	DateTime	The time value of the Andrew's pitchfork point 2 location on the X-axis.
+y2	double	The Y-axis value of the Andrew's pitchfork point 2 location.
+time3	DateTime	The time value of the Andrew's pitchfork point 3 location on the X-axis.
+y3	double	The Y-axis value of the Andrew's pitchfork point 3 location.
+color	Color	The Andrew's pitchfork lines color.
+thickness	int	The Andrew's pitchfork lines thickness.
+Return Value
+
+ChartAndrewsPitchfork
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawAndrewsPitchfork (3 of 6)
+
+Summary
+
+Draws an Andrew's pitchfork.
+
+Signature
+
+public abstract ChartAndrewsPitchfork DrawAndrewsPitchfork(string name, DateTime time1, double y1, DateTime time2, double y2, DateTime time3, double y3, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the Andrew's pitchfork point 1 location on the X-axis.
+y1	double	The Y-axis value of the Andrew's pitchfork point 1 location.
+time2	DateTime	The time value of the Andrew's pitchfork point 2 location on the X-axis.
+y2	double	The Y-axis value of the Andrew's pitchfork point 2 location.
+time3	DateTime	The time value of the Andrew's pitchfork point 3 location on the X-axis.
+y3	double	The Y-axis value of the Andrew's pitchfork point 3 location.
+color	Color	The Andrew's pitchfork lines color.
+thickness	int	The Andrew's pitchfork lines thickness.
+lineStyle	LineStyle	The Andrew's pitchfork lines style.
+Return Value
+
+ChartAndrewsPitchfork
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawAndrewsPitchfork (4 of 6)
+
+Summary
+
+Draws an Andrew's pitchfork.
+
+Signature
+
+public abstract ChartAndrewsPitchfork DrawAndrewsPitchfork(string name, int barIndex1, double y1, int barIndex2, double y2, int barIndex3, double y3, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the Andrew's pitchfork point 1 location on the X-axis.
+y1	double	The Y-axis value of the Andrew's pitchfork point 1 location.
+barIndex2	int	The bar index of the Andrew's pitchfork point 2 location on the X-axis.
+y2	double	The Y-axis value of the Andrew's pitchfork point 2 location.
+barIndex3	int	The bar index of the Andrew's pitchfork point 3 location on the X-axis.
+y3	double	The Y-axis value of the Andrew's pitchfork point 3 location.
+color	Color	The Andrew's pitchfork lines color.
+Return Value
+
+ChartAndrewsPitchfork
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawAndrewsPitchfork (5 of 6)
+
+Summary
+
+Draws an Andrews pitchfork.
+
+Signature
+
+public abstract ChartAndrewsPitchfork DrawAndrewsPitchfork(string name, int barIndex1, double y1, int barIndex2, double y2, int barIndex3, double y3, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the Andrew's pitchfork point 1 location on the X-axis.
+y1	double	The Y-axis value of the Andrew's pitchfork point 1 location.
+barIndex2	int	The bar index of the Andrew's pitchfork point 2 location on the X-axis.
+y2	double	The Y-axis value of the Andrew's pitchfork point 2 location.
+barIndex3	int	The bar index of the Andrew's pitchfork point 3 location on the X-axis.
+y3	double	The Y-axis value of the Andrew's pitchfork point 3 location.
+color	Color	The Andrew's pitchfork lines color.
+thickness	int	The Andrew's pitchfork lines thickness.
+Return Value
+
+ChartAndrewsPitchfork
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawAndrewsPitchfork (6 of 6)
+
+Summary
+
+Draws an Andrew's pitchfork.
+
+Signature
+
+public abstract ChartAndrewsPitchfork DrawAndrewsPitchfork(string name, int barIndex1, double y1, int barIndex2, double y2, int barIndex3, double y3, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the Andrew's pitchfork point 1 location on the X-axis.
+y1	double	The Y-axis value of the Andrew's pitchfork point 1 location.
+barIndex2	int	The bar index of the Andrew's pitchfork point 2 location on the X-axis.
+y2	double	The Y-axis value of the Andrew's pitchfork point 2 location.
+barIndex3	int	The bar index of the Andrew's pitchfork point 3 location on the X-axis.
+y3	double	The Y-axis value of the Andrew's pitchfork point 3 location.
+color	Color	The Andrew's pitchfork lines color.
+thickness	int	The Andrew's pitchfork lines thickness.
+lineStyle	LineStyle	The Andrew's pitchfork lines style.
+Return Value
+
+ChartAndrewsPitchfork
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawRectangle (6)¶
+DrawRectangle (1 of 6)
+
+Summary
+
+Draws a rectangle.
+
+Signature
+
+public abstract ChartRectangle DrawRectangle(string name, DateTime time1, double y1, DateTime time2, double y2, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the rectangle point 1 location on the X-axis.
+y1	double	The Y-axis value of the rectangle point 1 location.
+time2	DateTime	The time value of the rectangle point 2 location on the X-axis.
+y2	double	The Y-axis value of the rectangle point 2 location.
+color	Color	The rectangle lines color.
+Return Value
+
+ChartRectangle
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawRectangle (2 of 6)
+
+Summary
+
+Draws a rectangle.
+
+Signature
+
+public abstract ChartRectangle DrawRectangle(string name, DateTime time1, double y1, DateTime time2, double y2, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the rectangle point 1 location on the X-axis.
+y1	double	The Y-axis value of the rectangle point 1 location.
+time2	DateTime	The time value of the rectangle point 2 location on the X-axis.
+y2	double	The Y-axis value of the rectangle point 2 location.
+color	Color	The rectangle lines color.
+thickness	int	The rectangle lines thickness.
+Return Value
+
+ChartRectangle
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawRectangle (3 of 6)
+
+Summary
+
+Draws a rectangle.
+
+Signature
+
+public abstract ChartRectangle DrawRectangle(string name, DateTime time1, double y1, DateTime time2, double y2, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the rectangle point 1 location on the X-axis.
+y1	double	The Y-axis value of the rectangle point 1 location.
+time2	DateTime	The time value of the rectangle point 2 location on the X-axis.
+y2	double	The Y-axis value of the rectangle point 2 location.
+color	Color	The rectangle lines color.
+thickness	int	The rectangle lines thickness.
+lineStyle	LineStyle	The rectangle lines style.
+Return Value
+
+ChartRectangle
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawRectangle (4 of 6)
+
+Summary
+
+Draws a rectangle.
+
+Signature
+
+public abstract ChartRectangle DrawRectangle(string name, int barIndex1, double y1, int barIndex2, double y2, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the rectangle point 1 location on the X-axis.
+y1	double	The Y-axis value of the rectangle point 1 location.
+barIndex2	int	The bar index of the rectangle point 2 location on the X-axis.
+y2	double	The Y-axis value of the rectangle point 2 location.
+color	Color	The rectangle lines color.
+Return Value
+
+ChartRectangle
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawRectangle (5 of 6)
+
+Summary
+
+Draws a rectangle.
+
+Signature
+
+public abstract ChartRectangle DrawRectangle(string name, int barIndex1, double y1, int barIndex2, double y2, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the rectangle point 1 location on the X-axis.
+y1	double	The Y-axis value of the rectangle point 1 location.
+barIndex2	int	The bar index of the rectangle point 2 location on the X-axis.
+y2	double	The Y-axis value of the rectangle point 2 location.
+color	Color	The rectangle lines color.
+thickness	int	The rectangle lines thickness.
+Return Value
+
+ChartRectangle
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawRectangle (6 of 6)
+
+Summary
+
+Draws a rectangle.
+
+Signature
+
+public abstract ChartRectangle DrawRectangle(string name, int barIndex1, double y1, int barIndex2, double y2, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the rectangle point 1 location on the X-axis.
+y1	double	The Y-axis value of the rectangle point 1 location.
+barIndex2	int	The bar index of the rectangle point 2 location on the X-axis.
+y2	double	The Y-axis value of the rectangle point 2 location.
+color	Color	The rectangle lines color.
+thickness	int	The rectangle lines thickness.
+lineStyle	LineStyle	The rectangle lines style.
+Return Value
+
+ChartRectangle
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawEllipse (6)¶
+DrawEllipse (1 of 6)
+
+Summary
+
+Draws an ellipse.
+
+Signature
+
+public abstract ChartEllipse DrawEllipse(string name, DateTime time1, double y1, DateTime time2, double y2, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the ellipse point 1 location on the X-axis.
+y1	double	The Y-axis value of the ellipse point 1 location.
+time2	DateTime	The time value of the ellipse point 2 location on the X-axis.
+y2	double	The Y-axis value of the ellipse point 2 location.
+color	Color	The ellipse line color.
+Return Value
+
+ChartEllipse
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawEllipse (2 of 6)
+
+Summary
+
+Draws an ellipse.
+
+Signature
+
+public abstract ChartEllipse DrawEllipse(string name, DateTime time1, double y1, DateTime time2, double y2, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the ellipse point 1 location on the X-axis.
+y1	double	The Y-axis value of the ellipse point 1 location.
+time2	DateTime	The time value of the ellipse point 2 location on the X-axis.
+y2	double	The Y-axis value of the ellipse point 2 location.
+color	Color	The ellipse line color.
+thickness	int	The ellipse line thickness.
+Return Value
+
+ChartEllipse
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawEllipse (3 of 6)
+
+Summary
+
+Draws an ellipse.
+
+Signature
+
+public abstract ChartEllipse DrawEllipse(string name, DateTime time1, double y1, DateTime time2, double y2, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the ellipse point 1 location on the X-axis.
+y1	double	The Y-axis value of the ellipse point 1 location.
+time2	DateTime	The time value of the ellipse point 2 location on the X-axis.
+y2	double	The Y-axis value of the ellipse point 2 location.
+color	Color	The ellipse line color.
+thickness	int	The ellipse line thickness.
+lineStyle	LineStyle	The ellipse line style.
+Return Value
+
+ChartEllipse
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawEllipse (4 of 6)
+
+Summary
+
+Draws an ellipse.
+
+Signature
+
+public abstract ChartEllipse DrawEllipse(string name, int barIndex1, double y1, int barIndex2, double y2, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the ellipse point 1 location on the X-axis.
+y1	double	The Y-axis value of the ellipse point 1 location.
+barIndex2	int	The bar index of the ellipse point 2 location on the X-axis.
+y2	double	The Y-axis value of the ellipse point 2 location.
+color	Color	The ellipse line color.
+Return Value
+
+ChartEllipse
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawEllipse (5 of 6)
+
+Summary
+
+Draws an ellipse.
+
+Signature
+
+public abstract ChartEllipse DrawEllipse(string name, int barIndex1, double y1, int barIndex2, double y2, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the ellipse point 1 location on the X-axis.
+y1	double	The Y-axis value of the ellipse point 1 location.
+barIndex2	int	The bar index of the ellipse point 2 location on the X-axis.
+y2	double	The Y-axis value of the ellipse point 2 location.
+color	Color	The ellipse line color.
+thickness	int	The ellipse line thickness.
+Return Value
+
+ChartEllipse
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawEllipse (6 of 6)
+
+Summary
+
+Draws an ellipse.
+
+Signature
+
+public abstract ChartEllipse DrawEllipse(string name, int barIndex1, double y1, int barIndex2, double y2, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the ellipse point 1 location on the X-axis.
+y1	double	The Y-axis value of the ellipse point 1 location.
+barIndex2	int	The bar index of the ellipse point 2 location on the X-axis.
+y2	double	The Y-axis value of the ellipse point 2 location.
+color	Color	The ellipse line color.
+thickness	int	The ellipse line thickness.
+lineStyle	LineStyle	The ellipse line style.
+Return Value
+
+ChartEllipse
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawTriangle (6)¶
+DrawTriangle (1 of 6)
+
+Summary
+
+Draws a triangle.
+
+Signature
+
+public abstract ChartTriangle DrawTriangle(string name, DateTime time1, double y1, DateTime time2, double y2, DateTime time3, double y3, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the triangle point 1 location on the X-axis.
+y1	double	The Y-axis value of the triangle point 1 location.
+time2	DateTime	The time value of the triangle point 2 location on the X-axis.
+y2	double	The Y-axis value of the triangle point 2 location.
+time3	DateTime	The time value of the triangle point 3 location on the X-axis.
+y3	double	The Y-axis value of the triangle point 3 location.
+color	Color	The triangle line color.
+Return Value
+
+ChartTriangle
+
+DrawTriangle (2 of 6)
+
+Summary
+
+Draws a triangle.
+
+Signature
+
+public abstract ChartTriangle DrawTriangle(string name, DateTime time1, double y1, DateTime time2, double y2, DateTime time3, double y3, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the triangle point 1 location on the X-axis.
+y1	double	The Y-axis value of the triangle point 1 location.
+time2	DateTime	The time value of the triangle point 2 location on the X-axis.
+y2	double	The Y-axis value of the triangle point 2 location.
+time3	DateTime	The time value of the triangle point 3 location on the X-axis.
+y3	double	The Y-axis value of the triangle point 3 location.
+color	Color	The triangle line color.
+thickness	int	The triangle line thickness.
+Return Value
+
+ChartTriangle
+
+DrawTriangle (3 of 6)
+
+Summary
+
+Draws a triangle.
+
+Signature
+
+public abstract ChartTriangle DrawTriangle(string name, DateTime time1, double y1, DateTime time2, double y2, DateTime time3, double y3, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the triangle point 1 location on the X-axis.
+y1	double	The Y-axis value of the triangle point 1 location.
+time2	DateTime	The time value of the triangle point 2 location on the X-axis.
+y2	double	The Y-axis value of the triangle point 2 location.
+time3	DateTime	The time value of the triangle point 3 location on the X-axis.
+y3	double	The Y-axis value of the triangle point 3 location.
+color	Color	The triangle line color.
+thickness	int	The triangle line thickness.
+lineStyle	LineStyle	The triangle line style.
+Return Value
+
+ChartTriangle
+
+DrawTriangle (4 of 6)
+
+Summary
+
+Draws a triangle.
+
+Signature
+
+public abstract ChartTriangle DrawTriangle(string name, int barIndex1, double y1, int barIndex2, double y2, int barIndex3, double y3, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the triangle point 1 location on the X-axis.
+y1	double	The Y-axis value of the triangle point 1 location.
+barIndex2	int	The bar index of the triangle point 2 location on the X-axis.
+y2	double	The Y-axis value of the triangle point 2 location.
+barIndex3	int	The bar index of the triangle point 3 location on the X-axis.
+y3	double	The Y-axis value of the triangle point 3 location.
+color	Color	The triangle line color.
+Return Value
+
+ChartTriangle
+
+DrawTriangle (5 of 6)
+
+Summary
+
+Draws a triangle.
+
+Signature
+
+public abstract ChartTriangle DrawTriangle(string name, int barIndex1, double y1, int barIndex2, double y2, int barIndex3, double y3, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the triangle point 1 location on the X-axis.
+y1	double	The Y-axis value of the triangle point 1 location.
+barIndex2	int	The bar index of the triangle point 2 location on the X-axis.
+y2	double	The Y-axis value of the triangle point 2 location.
+barIndex3	int	The bar index of the triangle point 3 location on the X-axis.
+y3	double	The Y-axis value of the triangle point 3 location.
+color	Color	The triangle line color.
+thickness	int	The triangle line thickness.
+Return Value
+
+ChartTriangle
+
+DrawTriangle (6 of 6)
+
+Summary
+
+Draws a triangle.
+
+Signature
+
+public abstract ChartTriangle DrawTriangle(string name, int barIndex1, double y1, int barIndex2, double y2, int barIndex3, double y3, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the triangle point 1 location on the X-axis.
+y1	double	The Y-axis value of the triangle point 1 location.
+barIndex2	int	The bar index of the triangle point 2 location on the X-axis.
+y2	double	The Y-axis value of the triangle point 2 location.
+barIndex3	int	The bar index of the triangle point 3 location on the X-axis.
+y3	double	The Y-axis value of the triangle point 3 location.
+color	Color	The triangle line color.
+thickness	int	The triangle line thickness.
+lineStyle	LineStyle	The triangle line style.
+Return Value
+
+ChartTriangle
+
+DrawArrow (6)¶
+DrawArrow (1 of 6)
+
+Summary
+
+Draws an arrow.
+
+Signature
+
+public abstract ChartArrow DrawArrow(string name, DateTime time1, double y1, DateTime time2, double y2, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the trend line start point location on the X-axis.
+y1	double	The Y-axis value of the trend line start location.
+time2	DateTime	The time value of the trend line end point location on the X-axis.
+y2	double	The Y-axis value of the trend line end location.
+color	Color	The color of the trend line.
+Return Value
+
+ChartArrow
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawArrow (2 of 6)
+
+Summary
+
+Draws an arrow.
+
+Signature
+
+public abstract ChartArrow DrawArrow(string name, DateTime time1, double y1, DateTime time2, double y2, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the trend line start point location on the X-axis.
+y1	double	The Y-axis value of the trend line start location.
+time2	DateTime	The time value of the trend line end point location on the X-axis.
+y2	double	The Y-axis value of the trend line end location.
+color	Color	The color of the trend line.
+thickness	int	The thickness of the trend line.
+Return Value
+
+ChartArrow
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawArrow (3 of 6)
+
+Summary
+
+Draws an arrow.
+
+Signature
+
+public abstract ChartArrow DrawArrow(string name, DateTime time1, double y1, DateTime time2, double y2, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+time1	DateTime	The time value of the trend line start point location on the X-axis.
+y1	double	The Y-axis value of the trend line start location.
+time2	DateTime	The time value of the trend line end point location on the X-axis.
+y2	double	The Y-axis value of the trend line end location.
+color	Color	The color of the trend line.
+thickness	int	The thickness of the trend line.
+lineStyle	LineStyle	The trend line style.
+Return Value
+
+ChartArrow
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawArrow (4 of 6)
+
+Summary
+
+Draws an arrow.
+
+Signature
+
+public abstract ChartArrow DrawArrow(string name, int barIndex1, double y1, int barIndex2, double y2, Color color)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the trend line start point location on the X-axis.
+y1	double	The Y-axis value of the trend line start location.
+barIndex2	int	The bar index of the trend line end point location on the X-axis.
+y2	double	The Y-axis value of the trend line end location.
+color	Color	The color of the trend line.
+Return Value
+
+ChartArrow
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawArrow (5 of 6)
+
+Summary
+
+Draws an arrow.
+
+Signature
+
+public abstract ChartArrow DrawArrow(string name, int barIndex1, double y1, int barIndex2, double y2, Color color, int thickness)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the trend line start point location on the X-axis.
+y1	double	The Y-axis value of the trend line start location.
+barIndex2	int	The bar index of the trend line end point location on the X-axis.
+y2	double	The Y-axis value of the trend line end location.
+color	Color	The color of the trend line.
+thickness	int	The thickness of the trend line.
+Return Value
+
+ChartArrow
+
+Related Tutorials
+
+Chart Objects/Drawings
+DrawArrow (6 of 6)
+
+Summary
+
+Draws an arrow.
+
+Signature
+
+public abstract ChartArrow DrawArrow(string name, int barIndex1, double y1, int barIndex2, double y2, Color color, int thickness, LineStyle lineStyle)
+Parameters
+
+Name	Type	Description
+name	string	The chart object name - a unique name that can be only used once for a chart area. If duplicated, the chart object will be replaced with a new one of the same name.
+barIndex1	int	The bar index of the trend line start point location on the X-axis.
+y1	double	The Y-axis value of the trend line start location.
+barIndex2	int	The bar index of the trend line end point location on the X-axis.
+y2	double	The Y-axis value of the trend line end location.
+color	Color	The color of the trend line.
+thickness	int	The thickness of the trend line.
+lineStyle	LineStyle	The trend line style.
+Return Value
+
+ChartArrow
+
+Related Tutorials
+
+Chart Objects/Drawings
+XToTime¶
+Summary
+
+Converts Mouse X coordinate to area Time coordinate value.
+
+Signature
+
+public abstract DateTime XToTime(double x)
+Parameters
+
+Name	Type	Description
+x	double	Mouse X
+Return Value
+
+DateTime
+
+TimeToX¶
+Summary
+
+Converts area Time coordinate to Mouse X coordinate value.
+
+Signature
+
+public abstract double TimeToX(DateTime time)
+Parameters
+
+Name	Type	Description
+time	DateTime	Time
+Return Value
+
+double
+
+YToYValue¶
+Summary
+
+Converts Mouse Y coordinate to area Y axis coordinate value.
+
+Signature
+
+public abstract double YToYValue(double y)
+Parameters
+
+Name	Type	Description
+y	double	Mouse Y coordinate
+Return Value
+
+double
+
+YValueToY¶
+Summary
+
+Converts Area Y axis coordinate value to mouse Y coordinate.
+
+Signature
+
+public abstract double YValueToY(double yValue)
+Parameters
+
+Name	Type	Description
+yValue	double	Y value
+Return Value
+
+double
+
+XToBarIndex¶
+Summary
+
+Converts X coordinate to bar index.
+
+Signature
+
+public abstract double XToBarIndex(double x)
+Parameters
+
+Name	Type	Description
+x	double	X coordinate
+Return Value
+
+double
+
+BarIndexToX¶
+Summary
+
+Converts Bar Index to X coordinate.
+
+Signature
+
+public abstract double BarIndexToX(double barIndex)
+Parameters
+
+Name	Type	Description
+barIndex	double	Bar Index
+Return Value
+
+double
+
+Properties¶
+IsAlive¶
+Summary
+
+Checks whether the instance is still on the chart area.
+
+Signature
+
+public abstract bool IsAlive {get;}
+Return Value
+
+bool
+
+Width¶
+Summary
+
+Gets the width of the chart area.
+
+Signature
+
+public abstract double Width {get;}
+Return Value
+
+double
+
+Height¶
+Summary
+
+Gets the hight of the chart area.
+
+Signature
+
+public abstract double Height {get;}
+Return Value
+
+double
+
+BottomY¶
+Summary
+
+Gets the lowest visible Y-axis value.
+
+Signature
+
+public abstract double BottomY {get;}
+Return Value
+
+double
+
+TopY¶
+Summary
+
+Gets the highest visible Y-axis value.
+
+Signature
+
+public abstract double TopY {get;}
+Return Value
+
+double
+
+Objects¶
+Summary
+
+Gets the chart objects collection.
+
+Signature
+
+public abstract IReadonlyList<ChartObject> Objects {get;}
+Return Value
+
+IReadonlyList
+
+SelectedObjects¶
+Summary
+
+Gets the list of currently selected objects if any.
+
+Signature
+
+public abstract IReadonlyList<ChartObject> SelectedObjects {get;}
+Return Value
+
+IReadonlyList
+
+Events¶
+MouseEnter¶
+Summary
+
+Occurs when the cursor hover over the chart area.
+
+Signature
+
+public abstract event Action<ChartMouseEventArgs> MouseEnter;
+MouseLeave¶
+Summary
+
+Occurs when the cursor leaves the chart area
+
+Signature
+
+public abstract event Action<ChartMouseEventArgs> MouseLeave;
+MouseMove¶
+Summary
+
+Occurs when the cursor moves over the chart area.
+
+Signature
+
+public abstract event Action<ChartMouseEventArgs> MouseMove;
+MouseDown¶
+Summary
+
+Occurs when the left mouse button is pressed down.
+
+Signature
+
+public abstract event Action<ChartMouseEventArgs> MouseDown;
+MouseUp¶
+Summary
+
+Occurs when the left mouse button is released.
+
+Signature
+
+public abstract event Action<ChartMouseEventArgs> MouseUp;
+MouseWheel¶
+Summary
+
+Occurs when the mouse wheel button is rotated.
+
+Signature
+
+public abstract event Action<ChartMouseWheelEventArgs> MouseWheel;
+DragStart¶
+Summary
+
+Occurs when MouseDown event is happening on a chart area and a mouse is captured for dragging.
+
+Signature
+
+public abstract event Action<ChartDragEventArgs> DragStart;
+DragEnd¶
+Summary
+
+Occurs when mouse button is released while dragging a chart area or a chart area loses mouse capture.
+
+Signature
+
+public abstract event Action<ChartDragEventArgs> DragEnd;
+Drag¶
+Summary
+
+Occurs when dragging a chart area.
+
+Signature
+
+public abstract event Action<ChartDragEventArgs> Drag;
+SizeChanged¶
+Summary
+
+Occurs when the chart area size has changed.
+
+Signature
+
+public abstract event Action<ChartSizeEventArgs> SizeChanged;
+ScrollChanged¶
+Summary
+
+Occurs when the X-axis position value or the Y-axis position value changes while scrolling.
+
+Signature
+
+public abstract event Action<ChartScrollEventArgs> ScrollChanged;
+ObjectsAdded¶
+Summary
+
+Occurs when one or several chart objects are added to the chart area.
+
+Signature
+
+public abstract event Action<ChartObjectsAddedEventArgs> ObjectsAdded;
+ObjectsUpdated¶
+Summary
+
+Occurs when one or several chart objects are updated.
+
+Signature
+
+public abstract event Action<ChartObjectsUpdatedEventArgs> ObjectsUpdated;
+ObjectsRemoved¶
+Summary
+
+Occurs when one or several chart object are removed from the chart area.
+
+Signature
+
+public abstract event Action<ChartObjectsRemovedEventArgs> ObjectsRemoved;
+ObjectsSelectionChanged¶
+Summary
+
+Occurs when chart objects are selected or deselected.
+
+Signature
+
+public abstract event Action<ChartObjectsSelectionChangedEventArgs> ObjectsSelectionChanged;
+ObjectHoverChanged¶
+Summary
+
+Occurs when the cursor hovers over or leaves the object.
+
+Signature
+
+public abstract event Action<ChartObjectHoverChangedEventArgs> ObjectHoverChanged;
+ObjectAdded¶
+Signature
+
+public abstract event Action<ChartObjectAddedEventArgs> ObjectAdded;
+ObjectUpdated¶
+Signature
+
+public abstract event Action<ChartObjectUpdatedEventArgs> ObjectUpdated;
+ObjectRemoved¶
+Signature
+
+public abstract event Action<ChartObjectRemovedEventArgs> ObjectRemoved;
+ObjectSelectionChanged¶
+Signature
+
+public abstract event Action<ChartObjectSelectionChangedEventArgs> ObjectSelectionChanged;
+January 3, 2025
+ Back to top
+Copyright © 2025 Spotware Systems Ltd. cTrader, cAlgo, cBroker, cMirror. All righ

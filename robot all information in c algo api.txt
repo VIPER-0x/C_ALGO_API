@@ -1,0 +1,6776 @@
+Skip to content
+cTrader Algo
+Robot
+
+Search
+ 
+logocTrader Algo
+How-tos
+Documentation
+Synchronisation and Cloud
+cTrader Mobile Algo
+cTrader Web Algo
+References
+References
+Account
+AlgoRegistry
+Application
+Attributes
+Chart
+Collections
+Compilation
+Controls
+Dialogs
+EventArgs
+General
+General
+Algo
+Indicator
+Plugin
+Robot
+Table of contents
+Summary
+Remarks
+Namespace
+Examples
+Methods
+Stop
+ToString
+PlaceLimitOrder (24)
+PlaceLimitOrderAsync (24)
+ExecuteMarketOrder (18)
+ExecuteMarketOrderAsync (18)
+ExecuteMarketRangeOrder (6)
+ExecuteMarketRangeOrderAsync (6)
+CancelPendingOrder
+ModifyPendingOrder (18)
+CancelPendingOrderAsync
+ModifyPendingOrderAsync (18)
+ReversePosition (2)
+ModifyPosition (7)
+ClosePosition (3)
+ClosePositionAsync (3)
+ReversePositionAsync (2)
+ModifyPositionAsync (7)
+PlaceStopLimitOrder (22)
+PlaceStopLimitOrderAsync (22)
+PlaceStopOrder (27)
+PlaceStopOrderAsync (27)
+Properties
+Account
+LastResult
+Trade
+StandardIndicator
+SvgIcon
+HTTP
+Indicators
+Local storage
+Market Data
+Notifications
+Optimization
+Period
+Permissions
+Plugin
+Timer
+Trading
+Utility
+Watchlists
+WebSocket
+Forum
+Robot¶
+Summary¶
+Base class for all cBots.
+
+Remarks¶
+Provides a convenient framework for creating cBots including methods to create, modify, cancel orders and closepositions, methods triggered by each tick and each bar, access to built-in Indicators and more.
+
+Signature
+
+public class Robot : Algo
+Namespace¶
+cAlgo.API
+
+Examples¶
+ namespace cAlgo.Robots
+ {
+ [Robot]
+ public class myCBot : Robot
+ {
+     protected override void OnStart()
+     {
+         //This method is called when the cBot is being started, once.
+     }
+     protected override void OnBar()
+     {
+         // Called on each incoming Bar.
+     }
+     protected override void OnTick()
+     {
+         // Called on each incoming tick.
+     }
+     protected override void OnError(Error error)
+     {
+         Print("There has been an Error");
+     }
+     protected override void OnStop()
+     {
+         //This method is called when the cBot is being stoped.
+     }
+}
+Methods¶
+Stop¶
+Summary
+
+Stops the cBot. cBot will be completely stopped and will not send/receive any signals.
+
+Signature
+
+public void Stop()
+Return Value
+
+void
+
+Examples
+
+ // Will stop the cBot if the balance of the account goes under 1000
+ if(Account.Balance < 1000)
+ {
+     Stop();
+ }
+ToString¶
+Summary
+
+Returns the cBot class name
+
+Signature
+
+public string ToString()
+Return Value
+
+string
+
+Examples
+
+ protected override void OnStart()
+ {
+     Print(ToString());
+ }
+PlaceLimitOrder (24)¶
+PlaceLimitOrder (1 of 24)
+
+Summary
+
+Place a Limit Order
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+Return Value
+
+TradeResult
+
+PlaceLimitOrder (2 of 24)
+
+Summary
+
+Place a Limit Order
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+label	string	Label representing the order
+Return Value
+
+TradeResult
+
+PlaceLimitOrder (3 of 24)
+
+Summary
+
+Place a Limit Order
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+Return Value
+
+TradeResult
+
+PlaceLimitOrder (4 of 24)
+
+Summary
+
+Place a Limit Order
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry time
+Return Value
+
+TradeResult
+
+PlaceLimitOrder (5 of 24)
+
+Summary
+
+Place a Limit Order
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry time
+comment	string	Order comment
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+ PlaceLimitOrder(TradeType.Buy, Symbol, 100000,
+                 Symbol.Bid - 2*Symbol.PipSize);
+
+PlaceLimitOrder (6 of 24)
+
+Summary
+
+Place a Limit Order
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment, bool hasTrailingStop)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry time
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+ PlaceLimitOrder(TradeType.Buy, Symbol, 100000,
+                 Symbol.Bid - 2*Symbol.PipSize);
+
+PlaceLimitOrder (7 of 24)
+
+Summary
+
+Place a Limit Order
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry time
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+Example 7
+ PlaceLimitOrder(TradeType.Buy, Symbol, 100000,
+                 Symbol.Bid - 2*Symbol.PipSize);
+
+PlaceLimitOrder (8 of 24)
+
+Summary
+
+Place limit order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, Symbol symbol, long volume, double targetPrice)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	long	Volume of trade
+targetPrice	double	Target price (or better) at which the order is filled
+Return Value
+
+TradeResult
+
+PlaceLimitOrder (9 of 24)
+
+Summary
+
+Place limit order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	double	Volume of trade
+targetPrice	double	Target price (or better) at which the order is filled
+Return Value
+
+TradeResult
+
+PlaceLimitOrder (10 of 24)
+
+Summary
+
+Place limit order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, Symbol symbol, long volume, double targetPrice, string label)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	long	Volume of trade
+targetPrice	double	Target price (or better) at which the order is filled
+label	string	Label that represents the order
+Return Value
+
+TradeResult
+
+PlaceLimitOrder (11 of 24)
+
+Summary
+
+Place limit order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	double	Volume of trade
+targetPrice	double	Target price (or better) at which the order is filled
+label	string	Label that represents the order
+Return Value
+
+TradeResult
+
+PlaceLimitOrder (12 of 24)
+
+Summary
+
+Place limit order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, Symbol symbol, long volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	long	Volume of trade
+targetPrice	double	Target price (or better) at which the order is filled
+label	string	Label that represents the order
+stopLossPips	double?	
+takeProfitPips	double?	
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+ PlaceLimitOrderAsync(TradeType.Buy, Symbol, 10000,
+                     Symbol.Bid - 10* Symbol.PipSize,"myLabel");
+
+PlaceLimitOrder (13 of 24)
+
+Summary
+
+Place limit order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	double	Volume of trade
+targetPrice	double	Target price (or better) at which the order is filled
+label	string	Label that represents the order
+stopLossPips	double?	
+takeProfitPips	double?	
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+ PlaceLimitOrderAsync(TradeType.Buy, Symbol, 10000,
+                     Symbol.Bid - 10* Symbol.PipSize,"myLabel");
+
+PlaceLimitOrder (14 of 24)
+
+Summary
+
+Place limit order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, Symbol symbol, long volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	long	Volume of trade
+targetPrice	double	Target price (or better) at which the order is filled
+label	string	Label that represents the order
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	Order expiry date and time
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+ PlaceLimitOrderAsync(TradeType.Buy, Symbol, 10000,
+                     Symbol.Bid - 10* Symbol.PipSize,"myLabel");
+
+PlaceLimitOrder (15 of 24)
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+Return Value
+
+TradeResult
+
+PlaceLimitOrder (16 of 24)
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, Symbol symbol, long volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	long	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+Return Value
+
+TradeResult
+
+PlaceLimitOrder (17 of 24)
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+Return Value
+
+TradeResult
+
+PlaceLimitOrder (18 of 24)
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+Return Value
+
+TradeResult
+
+PlaceLimitOrder (19 of 24)
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+Return Value
+
+TradeResult
+
+PlaceLimitOrder (20 of 24)
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+Return Value
+
+TradeResult
+
+PlaceLimitOrder (21 of 24)
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+Return Value
+
+TradeResult
+
+PlaceLimitOrder (22 of 24)
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+Return Value
+
+TradeResult
+
+PlaceLimitOrder (23 of 24)
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+Return Value
+
+TradeResult
+
+PlaceLimitOrder (24 of 24)
+
+Signature
+
+public TradeResult PlaceLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+Return Value
+
+TradeResult
+
+PlaceLimitOrderAsync (24)¶
+PlaceLimitOrderAsync (1 of 24)
+
+Summary
+
+Place limit order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume of trade
+targetPrice	double	Target price (or better) at which the order is filled
+callback	Action	The action when the position closes
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (2 of 24)
+
+Summary
+
+Place limit order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume of trade
+targetPrice	double	Target price (or better) at which the order is filled
+label	string	Label that represents the order
+callback	Action	The action when the position closes
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (3 of 24)
+
+Summary
+
+Place limit order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume of trade
+targetPrice	double	Target price (or better) at which the order is filled
+label	string	Label that represents the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+callback	Action	The action when the position closes
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (4 of 24)
+
+Summary
+
+Place limit order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume of trade
+targetPrice	double	Target price (or better) at which the order is filled
+label	string	Label that represents the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry date and time
+callback	Action	The action when the position closes
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (5 of 24)
+
+Summary
+
+Place limit order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume of trade
+targetPrice	double	Target price (or better) at which the order is filled
+label	string	Label that represents the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry date and time
+comment	string	Order comment
+callback	Action	The action when the position closes
+Return Value
+
+TradeOperation
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+ PlaceLimitOrderAsync(TradeType.Buy, Symbol, 10000,
+                     Symbol.Bid - 10* Symbol.PipSize,"myLabel");
+
+PlaceLimitOrderAsync (6 of 24)
+
+Summary
+
+Place limit order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment, bool hasTrailingStop, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume of trade
+targetPrice	double	Target price (or better) at which the order is filled
+label	string	Label that represents the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry date and time
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+callback	Action	The action when the position closes
+Return Value
+
+TradeOperation
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+ PlaceLimitOrderAsync(TradeType.Buy, Symbol, 10000,
+                     Symbol.Bid - 10* Symbol.PipSize,"myLabel");
+
+PlaceLimitOrderAsync (7 of 24)
+
+Summary
+
+Place limit order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume of trade
+targetPrice	double	Target price (or better) at which the order is filled
+label	string	Label that represents the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry date and time
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+callback	Action	The action when the position closes
+Return Value
+
+TradeOperation
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+ PlaceLimitOrderAsync(TradeType.Buy, Symbol, 10000,
+                     Symbol.Bid - 10* Symbol.PipSize,"myLabel");
+
+PlaceLimitOrderAsync (8 of 24)
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, Symbol symbol, long volume, double targetPrice, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	long	
+targetPrice	double	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (9 of 24)
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (10 of 24)
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, Symbol symbol, long volume, double targetPrice, string label, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	long	
+targetPrice	double	
+label	string	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (11 of 24)
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (12 of 24)
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, Symbol symbol, long volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	long	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (13 of 24)
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (14 of 24)
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, Symbol symbol, long volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	long	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (15 of 24)
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (16 of 24)
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, Symbol symbol, long volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	long	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (17 of 24)
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (18 of 24)
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (19 of 24)
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (20 of 24)
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (21 of 24)
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (22 of 24)
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (23 of 24)
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceLimitOrderAsync (24 of 24)
+
+Signature
+
+public TradeOperation PlaceLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ExecuteMarketOrder (18)¶
+ExecuteMarketOrder (1 of 18)
+
+Summary
+
+Execute a Market Order
+
+Signature
+
+public TradeResult ExecuteMarketOrder(TradeType tradeType, string symbolName, double volume)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+Return Value
+
+TradeResult
+
+ExecuteMarketOrder (2 of 18)
+
+Summary
+
+Execute a Market Order
+
+Signature
+
+public TradeResult ExecuteMarketOrder(TradeType tradeType, string symbolName, double volume, string label)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+label	string	Representing label
+Return Value
+
+TradeResult
+
+ExecuteMarketOrder (3 of 18)
+
+Summary
+
+Execute a Market Order
+
+Signature
+
+public TradeResult ExecuteMarketOrder(TradeType tradeType, string symbolName, double volume, string label, double? stopLossPips, double? takeProfitPips)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+label	string	Representing label
+stopLossPips	double?	Stop loss in pips
+takeProfitPips	double?	Take profit in pips
+Return Value
+
+TradeResult
+
+ExecuteMarketOrder (4 of 18)
+
+Summary
+
+Execute a Market Order
+
+Signature
+
+public TradeResult ExecuteMarketOrder(TradeType tradeType, string symbolName, double volume, string label, double? stopLossPips, double? takeProfitPips, string comment)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+label	string	Representing label
+stopLossPips	double?	Stop loss in pips
+takeProfitPips	double?	Take profit in pips
+comment	string	order comment
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+ ExecuteMarketOrder(TradeType.Sell, Symbol, 10000);
+
+ExecuteMarketOrder (5 of 18)
+
+Summary
+
+Execute a Market Order
+
+Signature
+
+public TradeResult ExecuteMarketOrder(TradeType tradeType, string symbolName, double volume, string label, double? stopLossPips, double? takeProfitPips, string comment, bool hasTrailingStop)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+label	string	Representing label
+stopLossPips	double?	Stop loss in pips
+takeProfitPips	double?	Take profit in pips
+comment	string	order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+ ExecuteMarketOrder(TradeType.Sell, Symbol, 10000);
+
+ExecuteMarketOrder (6 of 18)
+
+Summary
+
+Execute a Market Order
+
+Signature
+
+public TradeResult ExecuteMarketOrder(TradeType tradeType, string symbolName, double volume, string label, double? stopLossPips, double? takeProfitPips, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+label	string	Representing label
+stopLossPips	double?	Stop loss in pips
+takeProfitPips	double?	Take profit in pips
+comment	string	order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+Example 7
+ ExecuteMarketOrder(TradeType.Sell, Symbol, 10000);
+
+ExecuteMarketOrder (7 of 18)
+
+Summary
+
+Execute a market order in asynchronous execution mode
+
+Signature
+
+public TradeResult ExecuteMarketOrder(TradeType tradeType, Symbol symbol, long volume)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	long	Volume (in units) of trade
+Return Value
+
+TradeResult
+
+ExecuteMarketOrder (8 of 18)
+
+Summary
+
+Execute a market order in asynchronous execution mode
+
+Signature
+
+public TradeResult ExecuteMarketOrder(TradeType tradeType, Symbol symbol, double volume)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	double	Volume (in units) of trade
+Return Value
+
+TradeResult
+
+ExecuteMarketOrder (9 of 18)
+
+Summary
+
+Execute a market order in asynchronous execution mode
+
+Signature
+
+public TradeResult ExecuteMarketOrder(TradeType tradeType, Symbol symbol, long volume, string label)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	long	Volume (in units) of trade
+label	string	Label representing the order
+Return Value
+
+TradeResult
+
+ExecuteMarketOrder (10 of 18)
+
+Summary
+
+Execute a market order in asynchronous execution mode
+
+Signature
+
+public TradeResult ExecuteMarketOrder(TradeType tradeType, Symbol symbol, double volume, string label)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	double	Volume (in units) of trade
+label	string	Label representing the order
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+ ExecuteMarketOrderAsync(TradeType.Buy, Symbol, 10000);
+
+ExecuteMarketOrder (11 of 18)
+
+Summary
+
+Execute a market order in asynchronous execution mode
+
+Signature
+
+public TradeResult ExecuteMarketOrder(TradeType tradeType, Symbol symbol, long volume, string label, double? stopLossPips, double? takeProfitPips)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	long	Volume (in units) of trade
+label	string	Label representing the order
+stopLossPips	double?	Stop loss in pips
+takeProfitPips	double?	Take profit in pips
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+Example 7
+ ExecuteMarketOrderAsync(TradeType.Buy, Symbol, 10000);
+
+ExecuteMarketOrder (12 of 18)
+
+Summary
+
+Execute a market order in asynchronous execution mode
+
+Signature
+
+public TradeResult ExecuteMarketOrder(TradeType tradeType, Symbol symbol, double volume, string label, double? stopLossPips, double? takeProfitPips)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	double	Volume (in units) of trade
+label	string	Label representing the order
+stopLossPips	double?	Stop loss in pips
+takeProfitPips	double?	Take profit in pips
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+Example 7
+Example 8
+ ExecuteMarketOrderAsync(TradeType.Buy, Symbol, 10000);
+
+ExecuteMarketOrder (13 of 18)
+
+Signature
+
+public TradeResult ExecuteMarketOrder(TradeType tradeType, Symbol symbol, long volume, string label, double? stopLossPips, double? takeProfitPips, double? marketRangePips)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	long	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+marketRangePips	double?	
+Return Value
+
+TradeResult
+
+ExecuteMarketOrder (14 of 18)
+
+Signature
+
+public TradeResult ExecuteMarketOrder(TradeType tradeType, Symbol symbol, double volume, string label, double? stopLossPips, double? takeProfitPips, double? marketRangePips)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+marketRangePips	double?	
+Return Value
+
+TradeResult
+
+ExecuteMarketOrder (15 of 18)
+
+Signature
+
+public TradeResult ExecuteMarketOrder(TradeType tradeType, Symbol symbol, long volume, string label, double? stopLossPips, double? takeProfitPips, double? marketRangePips, string comment)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	long	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+marketRangePips	double?	
+comment	string	
+Return Value
+
+TradeResult
+
+ExecuteMarketOrder (16 of 18)
+
+Signature
+
+public TradeResult ExecuteMarketOrder(TradeType tradeType, Symbol symbol, double volume, string label, double? stopLossPips, double? takeProfitPips, double? marketRangePips, string comment)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+marketRangePips	double?	
+comment	string	
+Return Value
+
+TradeResult
+
+ExecuteMarketOrder (17 of 18)
+
+Signature
+
+public TradeResult ExecuteMarketOrder(TradeType tradeType, Symbol symbol, double volume, string label, double? stopLossPips, double? takeProfitPips, double? marketRangePips, string comment, bool hasTrailingStop)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+marketRangePips	double?	
+comment	string	
+hasTrailingStop	bool	
+Return Value
+
+TradeResult
+
+ExecuteMarketOrder (18 of 18)
+
+Signature
+
+public TradeResult ExecuteMarketOrder(TradeType tradeType, Symbol symbol, double volume, string label, double? stopLossPips, double? takeProfitPips, double? marketRangePips, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+marketRangePips	double?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+Return Value
+
+TradeResult
+
+ExecuteMarketOrderAsync (18)¶
+ExecuteMarketOrderAsync (1 of 18)
+
+Summary
+
+Execute a market order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ExecuteMarketOrderAsync(TradeType tradeType, string symbolName, double volume, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+callback	Action	Event raised when position is opened
+Return Value
+
+TradeOperation
+
+ExecuteMarketOrderAsync (2 of 18)
+
+Summary
+
+Execute a market order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ExecuteMarketOrderAsync(TradeType tradeType, string symbolName, double volume, string label, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+label	string	Label representing the order
+callback	Action	Event raised when position is opened
+Return Value
+
+TradeOperation
+
+ExecuteMarketOrderAsync (3 of 18)
+
+Summary
+
+Execute a market order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ExecuteMarketOrderAsync(TradeType tradeType, string symbolName, double volume, string label, double? stopLossPips, double? takeProfitPips, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+label	string	Label representing the order
+stopLossPips	double?	Stop loss in pips
+takeProfitPips	double?	Take profit in pips
+callback	Action	Event raised when position is opened
+Return Value
+
+TradeOperation
+
+ExecuteMarketOrderAsync (4 of 18)
+
+Summary
+
+Execute a market order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ExecuteMarketOrderAsync(TradeType tradeType, string symbolName, double volume, string label, double? stopLossPips, double? takeProfitPips, string comment, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+label	string	Label representing the order
+stopLossPips	double?	Stop loss in pips
+takeProfitPips	double?	Take profit in pips
+comment	string	Order comment
+callback	Action	Event raised when position is opened
+Return Value
+
+TradeOperation
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+ ExecuteMarketOrderAsync(TradeType.Buy, Symbol, 10000);
+
+ExecuteMarketOrderAsync (5 of 18)
+
+Summary
+
+Execute a market order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ExecuteMarketOrderAsync(TradeType tradeType, string symbolName, double volume, string label, double? stopLossPips, double? takeProfitPips, string comment, bool hasTrailingStop, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+label	string	Label representing the order
+stopLossPips	double?	Stop loss in pips
+takeProfitPips	double?	Take profit in pips
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+callback	Action	Event raised when position is opened
+Return Value
+
+TradeOperation
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+Example 7
+ ExecuteMarketOrderAsync(TradeType.Buy, Symbol, 10000);
+
+ExecuteMarketOrderAsync (6 of 18)
+
+Summary
+
+Execute a market order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ExecuteMarketOrderAsync(TradeType tradeType, string symbolName, double volume, string label, double? stopLossPips, double? takeProfitPips, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+label	string	Label representing the order
+stopLossPips	double?	Stop loss in pips
+takeProfitPips	double?	Take profit in pips
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+callback	Action	Event raised when position is opened
+Return Value
+
+TradeOperation
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+Example 7
+Example 8
+ ExecuteMarketOrderAsync(TradeType.Buy, Symbol, 10000);
+
+ExecuteMarketOrderAsync (7 of 18)
+
+Signature
+
+public TradeOperation ExecuteMarketOrderAsync(TradeType tradeType, Symbol symbol, long volume, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	long	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ExecuteMarketOrderAsync (8 of 18)
+
+Signature
+
+public TradeOperation ExecuteMarketOrderAsync(TradeType tradeType, Symbol symbol, double volume, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ExecuteMarketOrderAsync (9 of 18)
+
+Signature
+
+public TradeOperation ExecuteMarketOrderAsync(TradeType tradeType, Symbol symbol, long volume, string label, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	long	
+label	string	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ExecuteMarketOrderAsync (10 of 18)
+
+Signature
+
+public TradeOperation ExecuteMarketOrderAsync(TradeType tradeType, Symbol symbol, double volume, string label, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+label	string	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ExecuteMarketOrderAsync (11 of 18)
+
+Signature
+
+public TradeOperation ExecuteMarketOrderAsync(TradeType tradeType, Symbol symbol, long volume, string label, double? stopLossPips, double? takeProfitPips, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	long	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ExecuteMarketOrderAsync (12 of 18)
+
+Signature
+
+public TradeOperation ExecuteMarketOrderAsync(TradeType tradeType, Symbol symbol, double volume, string label, double? stopLossPips, double? takeProfitPips, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ExecuteMarketOrderAsync (13 of 18)
+
+Signature
+
+public TradeOperation ExecuteMarketOrderAsync(TradeType tradeType, Symbol symbol, long volume, string label, double? stopLossPips, double? takeProfitPips, double? marketRangePips, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	long	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+marketRangePips	double?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ExecuteMarketOrderAsync (14 of 18)
+
+Signature
+
+public TradeOperation ExecuteMarketOrderAsync(TradeType tradeType, Symbol symbol, double volume, string label, double? stopLossPips, double? takeProfitPips, double? marketRangePips, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+marketRangePips	double?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ExecuteMarketOrderAsync (15 of 18)
+
+Signature
+
+public TradeOperation ExecuteMarketOrderAsync(TradeType tradeType, Symbol symbol, long volume, string label, double? stopLossPips, double? takeProfitPips, double? marketRangePips, string comment, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	long	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+marketRangePips	double?	
+comment	string	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ExecuteMarketOrderAsync (16 of 18)
+
+Signature
+
+public TradeOperation ExecuteMarketOrderAsync(TradeType tradeType, Symbol symbol, double volume, string label, double? stopLossPips, double? takeProfitPips, double? marketRangePips, string comment, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+marketRangePips	double?	
+comment	string	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ExecuteMarketOrderAsync (17 of 18)
+
+Signature
+
+public TradeOperation ExecuteMarketOrderAsync(TradeType tradeType, Symbol symbol, double volume, string label, double? stopLossPips, double? takeProfitPips, double? marketRangePips, string comment, bool hasTrailingStop, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+marketRangePips	double?	
+comment	string	
+hasTrailingStop	bool	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ExecuteMarketOrderAsync (18 of 18)
+
+Signature
+
+public TradeOperation ExecuteMarketOrderAsync(TradeType tradeType, Symbol symbol, double volume, string label, double? stopLossPips, double? takeProfitPips, double? marketRangePips, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+marketRangePips	double?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ExecuteMarketRangeOrder (6)¶
+ExecuteMarketRangeOrder (1 of 6)
+
+Summary
+
+Execute a Market Order
+
+Signature
+
+public TradeResult ExecuteMarketRangeOrder(TradeType tradeType, string symbolName, double volume, double marketRangePips, double basePrice)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+marketRangePips	double	The market range (slippage) in Pips
+basePrice	double	Base price to calculate relative slippage price
+Return Value
+
+TradeResult
+
+ExecuteMarketRangeOrder (2 of 6)
+
+Summary
+
+Execute a Market Order
+
+Signature
+
+public TradeResult ExecuteMarketRangeOrder(TradeType tradeType, string symbolName, double volume, double marketRangePips, double basePrice, string label)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+marketRangePips	double	The market range (slippage) in Pips
+basePrice	double	Base price to calculate relative slippage price
+label	string	Representing label
+Return Value
+
+TradeResult
+
+ExecuteMarketRangeOrder (3 of 6)
+
+Summary
+
+Execute a Market Order
+
+Signature
+
+public TradeResult ExecuteMarketRangeOrder(TradeType tradeType, string symbolName, double volume, double marketRangePips, double basePrice, string label, double? stopLossPips, double? takeProfitPips)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+marketRangePips	double	The market range (slippage) in Pips
+basePrice	double	Base price to calculate relative slippage price
+label	string	Representing label
+stopLossPips	double?	Stop loss in pips
+takeProfitPips	double?	Take profit in pips
+Return Value
+
+TradeResult
+
+ExecuteMarketRangeOrder (4 of 6)
+
+Summary
+
+Execute a Market Order
+
+Signature
+
+public TradeResult ExecuteMarketRangeOrder(TradeType tradeType, string symbolName, double volume, double marketRangePips, double basePrice, string label, double? stopLossPips, double? takeProfitPips, string comment)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+marketRangePips	double	The market range (slippage) in Pips
+basePrice	double	Base price to calculate relative slippage price
+label	string	Representing label
+stopLossPips	double?	Stop loss in pips
+takeProfitPips	double?	Take profit in pips
+comment	string	order comment
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+ ExecuteMarketRangeOrder(TradeType.Sell, Symbol, 10000);
+
+ExecuteMarketRangeOrder (5 of 6)
+
+Summary
+
+Execute a Market Order
+
+Signature
+
+public TradeResult ExecuteMarketRangeOrder(TradeType tradeType, string symbolName, double volume, double marketRangePips, double basePrice, string label, double? stopLossPips, double? takeProfitPips, string comment, bool hasTrailingStop)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+marketRangePips	double	The market range (slippage) in Pips
+basePrice	double	Base price to calculate relative slippage price
+label	string	Representing label
+stopLossPips	double?	Stop loss in pips
+takeProfitPips	double?	Take profit in pips
+comment	string	order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+ ExecuteMarketRangeOrder(TradeType.Sell, Symbol, 10000);
+
+ExecuteMarketRangeOrder (6 of 6)
+
+Summary
+
+Execute a Market Order
+
+Signature
+
+public TradeResult ExecuteMarketRangeOrder(TradeType tradeType, string symbolName, double volume, double marketRangePips, double basePrice, string label, double? stopLossPips, double? takeProfitPips, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+marketRangePips	double	The market range (slippage) in Pips
+basePrice	double	Base price to calculate relative slippage price
+label	string	Representing label
+stopLossPips	double?	Stop loss in pips
+takeProfitPips	double?	Take profit in pips
+comment	string	order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+Example 7
+ ExecuteMarketRangeOrder(TradeType.Sell, Symbol, 10000);
+
+ExecuteMarketRangeOrderAsync (6)¶
+ExecuteMarketRangeOrderAsync (1 of 6)
+
+Summary
+
+Execute a market order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ExecuteMarketRangeOrderAsync(TradeType tradeType, string symbolName, double volume, double marketRangePips, double basePrice, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+marketRangePips	double	The market range (slippage) in Pips
+basePrice	double	Base price to calculate relative slippage price
+callback	Action	Event raised when position is opened
+Return Value
+
+TradeOperation
+
+ExecuteMarketRangeOrderAsync (2 of 6)
+
+Summary
+
+Execute a market order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ExecuteMarketRangeOrderAsync(TradeType tradeType, string symbolName, double volume, double marketRangePips, double basePrice, string label, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+marketRangePips	double	The market range (slippage) in Pips
+basePrice	double	Base price to calculate relative slippage price
+label	string	Label representing the order
+callback	Action	Event raised when position is opened
+Return Value
+
+TradeOperation
+
+ExecuteMarketRangeOrderAsync (3 of 6)
+
+Summary
+
+Execute a market order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ExecuteMarketRangeOrderAsync(TradeType tradeType, string symbolName, double volume, double marketRangePips, double basePrice, string label, double? stopLossPips, double? takeProfitPips, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+marketRangePips	double	The market range (slippage) in Pips
+basePrice	double	Base price to calculate relative slippage price
+label	string	Label representing the order
+stopLossPips	double?	Stop loss in pips
+takeProfitPips	double?	Take profit in pips
+callback	Action	Event raised when position is opened
+Return Value
+
+TradeOperation
+
+ExecuteMarketRangeOrderAsync (4 of 6)
+
+Summary
+
+Execute a market order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ExecuteMarketRangeOrderAsync(TradeType tradeType, string symbolName, double volume, double marketRangePips, double basePrice, string label, double? stopLossPips, double? takeProfitPips, string comment, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+marketRangePips	double	The market range (slippage) in Pips
+basePrice	double	Base price to calculate relative slippage price
+label	string	Label representing the order
+stopLossPips	double?	Stop loss in pips
+takeProfitPips	double?	Take profit in pips
+comment	string	Order comment
+callback	Action	Event raised when position is opened
+Return Value
+
+TradeOperation
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+ ExecuteMarketRangeOrderAsync(TradeType.Buy, Symbol, 10000);
+
+ExecuteMarketRangeOrderAsync (5 of 6)
+
+Summary
+
+Execute a market order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ExecuteMarketRangeOrderAsync(TradeType tradeType, string symbolName, double volume, double marketRangePips, double basePrice, string label, double? stopLossPips, double? takeProfitPips, string comment, bool hasTrailingStop, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+marketRangePips	double	The market range (slippage) in Pips
+basePrice	double	Base price to calculate relative slippage price
+label	string	Label representing the order
+stopLossPips	double?	Stop loss in pips
+takeProfitPips	double?	Take profit in pips
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+callback	Action	Event raised when position is opened
+Return Value
+
+TradeOperation
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+Example 7
+ ExecuteMarketRangeOrderAsync(TradeType.Buy, Symbol, 10000);
+
+ExecuteMarketRangeOrderAsync (6 of 6)
+
+Summary
+
+Execute a market order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ExecuteMarketRangeOrderAsync(TradeType tradeType, string symbolName, double volume, double marketRangePips, double basePrice, string label, double? stopLossPips, double? takeProfitPips, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+marketRangePips	double	The market range (slippage) in Pips
+basePrice	double	Base price to calculate relative slippage price
+label	string	Label representing the order
+stopLossPips	double?	Stop loss in pips
+takeProfitPips	double?	Take profit in pips
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+callback	Action	Event raised when position is opened
+Return Value
+
+TradeOperation
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+Example 7
+Example 8
+ ExecuteMarketRangeOrderAsync(TradeType.Buy, Symbol, 10000);
+
+CancelPendingOrder¶
+Summary
+
+Cancel a Pending Order
+
+Signature
+
+public TradeResult CancelPendingOrder(PendingOrder pendingOrder)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order which is affected
+Return Value
+
+TradeResult
+
+Examples
+
+ foreach (var order in PendingOrders)
+ {
+     CancelPendingOrder(order);
+ }
+ModifyPendingOrder (18)¶
+ModifyPendingOrder (1 of 18)
+
+Summary
+
+Modify a Pending Order
+
+Signature
+
+public TradeResult ModifyPendingOrder(PendingOrder pendingOrder, double targetPrice)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order which is affected
+targetPrice	double	New target price
+Return Value
+
+TradeResult
+
+Examples
+
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrder(order, order.TargetPrice);
+ }
+ModifyPendingOrder (2 of 18)
+
+Summary
+
+Modify a Pending Order
+
+Signature
+
+public TradeResult ModifyPendingOrder(PendingOrder pendingOrder, double targetPrice, double? stopLoss, double? takeProfit, ProtectionType? protectionType)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order which is affected
+targetPrice	double	New target price
+stopLoss	double?	New Stop loss
+takeProfit	double?	New Take profit
+protectionType	ProtectionType?	New Protection type
+Return Value
+
+TradeResult
+
+Examples
+
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrder(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative);
+ }
+ModifyPendingOrder (3 of 18)
+
+Summary
+
+Modify a Pending Order
+
+Signature
+
+public TradeResult ModifyPendingOrder(PendingOrder pendingOrder, double targetPrice, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expirationTime)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order which is affected
+targetPrice	double	New target price
+stopLoss	double?	New Stop loss
+takeProfit	double?	New Take profit
+protectionType	ProtectionType?	New Protection type
+expirationTime	DateTime?	New order expiration time
+Return Value
+
+TradeResult
+
+Examples
+
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrder(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                         order.ExpirationTime);
+ }
+ModifyPendingOrder (4 of 18)
+
+Summary
+
+Modify a Pending Order
+
+Signature
+
+public TradeResult ModifyPendingOrder(PendingOrder pendingOrder, double targetPrice, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expirationTime, long volume)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order which is affected
+targetPrice	double	New target price
+stopLoss	double?	New Stop loss
+takeProfit	double?	New Take profit
+protectionType	ProtectionType?	New Protection type
+expirationTime	DateTime?	New order expiration time
+volume	long	New volume in units for the order
+Return Value
+
+TradeResult
+
+Examples
+
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrder(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                         order.ExpirationTime, 5);
+ }
+ModifyPendingOrder (5 of 18)
+
+Summary
+
+Modify a Pending Order
+
+Signature
+
+public TradeResult ModifyPendingOrder(PendingOrder pendingOrder, double targetPrice, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expirationTime, double volume)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order which is affected
+targetPrice	double	New target price
+stopLoss	double?	New Stop loss
+takeProfit	double?	New Take profit
+protectionType	ProtectionType?	New Protection type
+expirationTime	DateTime?	New order expiration time
+volume	double	New volume in units for the order
+Return Value
+
+TradeResult
+
+Examples
+
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrder(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                         order.ExpirationTime, 5);
+ }
+ModifyPendingOrder (6 of 18)
+
+Summary
+
+Modify a Pending Order
+
+Signature
+
+public TradeResult ModifyPendingOrder(PendingOrder pendingOrder, double targetPrice, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expirationTime, double volume, bool hasTrailingStop)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order which is affected
+targetPrice	double	New target price
+stopLoss	double?	New Stop loss
+takeProfit	double?	New Take profit
+protectionType	ProtectionType?	New Protection type
+expirationTime	DateTime?	New order expiration time
+volume	double	New volume in units for the order
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrder(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                         order.ExpirationTime);
+ }
+
+ModifyPendingOrder (7 of 18)
+
+Summary
+
+Modify a Pending Order
+
+Signature
+
+public TradeResult ModifyPendingOrder(PendingOrder pendingOrder, double targetPrice, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expirationTime, double volume, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order which is affected
+targetPrice	double	New target price
+stopLoss	double?	New Stop loss
+takeProfit	double?	New Take profit
+protectionType	ProtectionType?	New Protection type
+expirationTime	DateTime?	New order expiration time
+volume	double	New volume in units for the order
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+Return Value
+
+TradeResult
+
+Examples
+
+ bool hasTrailingStop = false;
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrder(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                            order.ExpirationTime, 10000, hasTrailingStop, StopTriggerMethod.Trade);
+ }
+ModifyPendingOrder (8 of 18)
+
+Summary
+
+Modify a Pending Order
+
+Signature
+
+public TradeResult ModifyPendingOrder(PendingOrder pendingOrder, double targetPrice, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expirationTime, double volume, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod? stopOrderTriggerMethod)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order which is affected
+targetPrice	double	New target price
+stopLoss	double?	New Stop loss
+takeProfit	double?	New Take profit
+protectionType	ProtectionType?	New Protection type
+expirationTime	DateTime?	New order expiration time
+volume	double	New volume in units for the order
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+stopOrderTriggerMethod	StopTriggerMethod?	Determines how pending order will be triggered in case it's a StopOrder
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrder(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                            order.ExpirationTime);
+ }
+
+ModifyPendingOrder (9 of 18)
+
+Summary
+
+Modify a Pending Order
+
+Signature
+
+public TradeResult ModifyPendingOrder(PendingOrder pendingOrder, double targetPrice, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expirationTime, double volume, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod? stopOrderTriggerMethod, double? stopLimitRangePips)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order which is affected
+targetPrice	double	New target price
+stopLoss	double?	New Stop loss
+takeProfit	double?	New Take profit
+protectionType	ProtectionType?	New Protection type
+expirationTime	DateTime?	New order expiration time
+volume	double	New volume in units for the order
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+stopOrderTriggerMethod	StopTriggerMethod?	Determines how pending order will be triggered in case it's a StopOrder
+stopLimitRangePips	double?	Maximum distance for order execution from target price
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrder(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                            order.ExpirationTime);
+ }
+
+ModifyPendingOrder (10 of 18)
+
+Summary
+
+Modify a Pending Order in asynchronous execution mode
+
+Signature
+
+public TradeResult ModifyPendingOrder(PendingOrder pendingOrder, long volume, double targetPrice, double? stopLossPips, double? takeProfitPips, DateTime? expirationTime)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order to modify
+volume	long	
+targetPrice	double	New target price at which the order becomes market order
+stopLossPips	double?	
+takeProfitPips	double?	
+expirationTime	DateTime?	
+Return Value
+
+TradeResult
+
+Examples
+
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrderAsync(order, order.TargetPrice);
+ }
+ModifyPendingOrder (11 of 18)
+
+Summary
+
+Modify a Pending Order in asynchronous execution mode
+
+Signature
+
+public TradeResult ModifyPendingOrder(PendingOrder pendingOrder, double targetPrice, double? stopLossPips, double? takeProfitPips)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order to modify
+targetPrice	double	New target price at which the order becomes market order
+stopLossPips	double?	
+takeProfitPips	double?	
+Return Value
+
+TradeResult
+
+Examples
+
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrderAsync(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative);
+ }
+ModifyPendingOrder (12 of 18)
+
+Summary
+
+Modify a Pending Order in asynchronous execution mode
+
+Signature
+
+public TradeResult ModifyPendingOrder(PendingOrder pendingOrder, double targetPrice, double? stopLossPips, double? takeProfitPips, DateTime? expirationTime)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order to modify
+targetPrice	double	New target price at which the order becomes market order
+stopLossPips	double?	
+takeProfitPips	double?	
+expirationTime	DateTime?	New expiry date and time
+Return Value
+
+TradeResult
+
+Examples
+
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrderAsync(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                         order.ExpirationTime);
+ }
+ModifyPendingOrder (13 of 18)
+
+Summary
+
+Modify a Pending Order in asynchronous execution mode
+
+Signature
+
+public TradeResult ModifyPendingOrder(PendingOrder pendingOrder, double targetPrice, double? stopLossPips, double? takeProfitPips, DateTime? expirationTime, long volume)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order to modify
+targetPrice	double	New target price at which the order becomes market order
+stopLossPips	double?	
+takeProfitPips	double?	
+expirationTime	DateTime?	New expiry date and time
+volume	long	New volume in units for the order
+Return Value
+
+TradeResult
+
+Examples
+
+ bool hasTrailingStop = false;
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrderAsync(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                         order.ExpirationTime, 5);
+ }
+ModifyPendingOrder (14 of 18)
+
+Summary
+
+Modify a Pending Order in asynchronous execution mode
+
+Signature
+
+public TradeResult ModifyPendingOrder(PendingOrder pendingOrder, double targetPrice, double? stopLossPips, double? takeProfitPips, DateTime? expirationTime, double volume)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order to modify
+targetPrice	double	New target price at which the order becomes market order
+stopLossPips	double?	
+takeProfitPips	double?	
+expirationTime	DateTime?	New expiry date and time
+volume	double	New volume in units for the order
+Return Value
+
+TradeResult
+
+Examples
+
+ bool hasTrailingStop = false;
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrderAsync(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                         order.ExpirationTime, 5);
+ }
+ModifyPendingOrder (15 of 18)
+
+Summary
+
+Modify a Pending Order in asynchronous execution mode
+
+Signature
+
+public TradeResult ModifyPendingOrder(PendingOrder pendingOrder, double targetPrice, double? stopLossPips, double? takeProfitPips, DateTime? expirationTime, double volume, bool hasTrailingStop)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order to modify
+targetPrice	double	New target price at which the order becomes market order
+stopLossPips	double?	
+takeProfitPips	double?	
+expirationTime	DateTime?	New expiry date and time
+volume	double	New volume in units for the order
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+Return Value
+
+TradeResult
+
+Examples
+
+ bool hasTrailingStop = false;
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrderAsync(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                         order.ExpirationTime, 5, hasTrailingStop, StopTriggerMethod.Trade, StopTriggerMethod.Opposite);
+ }
+ModifyPendingOrder (16 of 18)
+
+Summary
+
+Modify a Pending Order in asynchronous execution mode
+
+Signature
+
+public TradeResult ModifyPendingOrder(PendingOrder pendingOrder, double targetPrice, double? stopLossPips, double? takeProfitPips, DateTime? expirationTime, double volume, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order to modify
+targetPrice	double	New target price at which the order becomes market order
+stopLossPips	double?	
+takeProfitPips	double?	
+expirationTime	DateTime?	New expiry date and time
+volume	double	New volume in units for the order
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+Return Value
+
+TradeResult
+
+Examples
+
+ bool hasTrailingStop = false;
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrderAsync(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                         order.ExpirationTime, 5, hasTrailingStop, StopTriggerMethod.Trade);
+ }
+ModifyPendingOrder (17 of 18)
+
+Summary
+
+Modify a Pending Order in asynchronous execution mode
+
+Signature
+
+public TradeResult ModifyPendingOrder(PendingOrder pendingOrder, double targetPrice, double? stopLossPips, double? takeProfitPips, DateTime? expirationTime, double volume, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod? stopOrderTriggerMethod)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order to modify
+targetPrice	double	New target price at which the order becomes market order
+stopLossPips	double?	
+takeProfitPips	double?	
+expirationTime	DateTime?	New expiry date and time
+volume	double	New volume in units for the order
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	
+stopOrderTriggerMethod	StopTriggerMethod?	
+Return Value
+
+TradeResult
+
+Examples
+
+ bool hasTrailingStop = false;
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrderAsync(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                         order.ExpirationTime, 5, hasTrailingStop);
+ }
+ModifyPendingOrder (18 of 18)
+
+Summary
+
+Modify a Pending Order in asynchronous execution mode
+
+Signature
+
+public TradeResult ModifyPendingOrder(PendingOrder pendingOrder, double targetPrice, double? stopLossPips, double? takeProfitPips, DateTime? expirationTime, double volume, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod? stopOrderTriggerMethod, double? stopLimitRangePips)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order to modify
+targetPrice	double	New target price at which the order becomes market order
+stopLossPips	double?	
+takeProfitPips	double?	
+expirationTime	DateTime?	New expiry date and time
+volume	double	New volume in units for the order
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+stopOrderTriggerMethod	StopTriggerMethod?	Determines how pending order will be triggered in case it's a StopOrder
+stopLimitRangePips	double?	Maximum distance for order execution from target price
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrderAsync(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                         order.ExpirationTime);
+ }
+
+CancelPendingOrderAsync¶
+Summary
+
+Cancel a Pending Order in asynchronous execution mode
+
+Signature
+
+public TradeOperation CancelPendingOrderAsync(PendingOrder pendingOrder, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order to cancel
+callback	Action	Method that is called when pending order is cancelled
+Return Value
+
+TradeOperation
+
+Examples
+
+ if (PendingOrders.Count > 0)
+ {
+     var pendingOrder = PendingOrders[0];
+     CancelPendingOrderAsync(pendingOrder);
+ }
+ModifyPendingOrderAsync (18)¶
+ModifyPendingOrderAsync (1 of 18)
+
+Summary
+
+Modify a Pending Order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ModifyPendingOrderAsync(PendingOrder pendingOrder, double targetPrice, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order to modify
+targetPrice	double	New target price at which the order becomes market order
+callback	Action	Method that is called when order is modified
+Return Value
+
+TradeOperation
+
+Examples
+
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrderAsync(order, order.TargetPrice);
+ }
+ModifyPendingOrderAsync (2 of 18)
+
+Summary
+
+Modify a Pending Order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ModifyPendingOrderAsync(PendingOrder pendingOrder, double targetPrice, double? stopLoss, double? takeProfit, ProtectionType? protectionType, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order to modify
+targetPrice	double	New target price at which the order becomes market order
+stopLoss	double?	New Stop loss
+takeProfit	double?	New Take profit
+protectionType	ProtectionType?	New Protection type
+callback	Action	Method that is called when order is modified
+Return Value
+
+TradeOperation
+
+Examples
+
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrderAsync(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative);
+ }
+ModifyPendingOrderAsync (3 of 18)
+
+Summary
+
+Modify a Pending Order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ModifyPendingOrderAsync(PendingOrder pendingOrder, double targetPrice, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expirationTime, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order to modify
+targetPrice	double	New target price at which the order becomes market order
+stopLoss	double?	New Stop loss
+takeProfit	double?	New Take profit
+protectionType	ProtectionType?	New Protection type
+expirationTime	DateTime?	New expiry date and time
+callback	Action	Method that is called when order is modified
+Return Value
+
+TradeOperation
+
+Examples
+
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrderAsync(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                         order.ExpirationTime);
+ }
+ModifyPendingOrderAsync (4 of 18)
+
+Summary
+
+Modify a Pending Order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ModifyPendingOrderAsync(PendingOrder pendingOrder, double targetPrice, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expirationTime, long volume, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order to modify
+targetPrice	double	New target price at which the order becomes market order
+stopLoss	double?	New Stop loss
+takeProfit	double?	New Take profit
+protectionType	ProtectionType?	New Protection type
+expirationTime	DateTime?	New expiry date and time
+volume	long	New volume in units for the order
+callback	Action	Method that is called when order is modified
+Return Value
+
+TradeOperation
+
+Examples
+
+ bool hasTrailingStop = false;
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrderAsync(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                         order.ExpirationTime, 5);
+ }
+ModifyPendingOrderAsync (5 of 18)
+
+Summary
+
+Modify a Pending Order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ModifyPendingOrderAsync(PendingOrder pendingOrder, double targetPrice, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expirationTime, double volume, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order to modify
+targetPrice	double	New target price at which the order becomes market order
+stopLoss	double?	New Stop loss
+takeProfit	double?	New Take profit
+protectionType	ProtectionType?	New Protection type
+expirationTime	DateTime?	New expiry date and time
+volume	double	New volume in units for the order
+callback	Action	Method that is called when order is modified
+Return Value
+
+TradeOperation
+
+Examples
+
+ bool hasTrailingStop = false;
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrderAsync(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                         order.ExpirationTime, 5);
+ }
+ModifyPendingOrderAsync (6 of 18)
+
+Summary
+
+Modify a Pending Order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ModifyPendingOrderAsync(PendingOrder pendingOrder, double targetPrice, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expirationTime, double volume, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod? stopOrderTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order to modify
+targetPrice	double	New target price at which the order becomes market order
+stopLoss	double?	New Stop loss
+takeProfit	double?	New Take profit
+protectionType	ProtectionType?	New Protection type
+expirationTime	DateTime?	New expiry date and time
+volume	double	New volume in units for the order
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+stopOrderTriggerMethod	StopTriggerMethod?	Determines how pending order will be triggered in case it's a StopOrder
+callback	Action	Method that is called when order is modified
+Return Value
+
+TradeOperation
+
+Examples
+
+ bool hasTrailingStop = false;
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrderAsync(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                         order.ExpirationTime, 5, hasTrailingStop, StopTriggerMethod.Trade, StopTriggerMethod.Opposite);
+ }
+ModifyPendingOrderAsync (7 of 18)
+
+Summary
+
+Modify a Pending Order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ModifyPendingOrderAsync(PendingOrder pendingOrder, double targetPrice, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expirationTime, double volume, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order to modify
+targetPrice	double	New target price at which the order becomes market order
+stopLoss	double?	New Stop loss
+takeProfit	double?	New Take profit
+protectionType	ProtectionType?	New Protection type
+expirationTime	DateTime?	New expiry date and time
+volume	double	New volume in units for the order
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+callback	Action	Method that is called when order is modified
+Return Value
+
+TradeOperation
+
+Examples
+
+ bool hasTrailingStop = false;
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrderAsync(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                         order.ExpirationTime, 5, hasTrailingStop, StopTriggerMethod.Trade);
+ }
+ModifyPendingOrderAsync (8 of 18)
+
+Summary
+
+Modify a Pending Order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ModifyPendingOrderAsync(PendingOrder pendingOrder, double targetPrice, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expirationTime, double volume, bool hasTrailingStop, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order to modify
+targetPrice	double	New target price at which the order becomes market order
+stopLoss	double?	New Stop loss
+takeProfit	double?	New Take profit
+protectionType	ProtectionType?	New Protection type
+expirationTime	DateTime?	New expiry date and time
+volume	double	New volume in units for the order
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+callback	Action	Method that is called when order is modified
+Return Value
+
+TradeOperation
+
+Examples
+
+ bool hasTrailingStop = false;
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrderAsync(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                         order.ExpirationTime, 5, hasTrailingStop);
+ }
+ModifyPendingOrderAsync (9 of 18)
+
+Summary
+
+Modify a Pending Order in asynchronous execution mode
+
+Signature
+
+public TradeOperation ModifyPendingOrderAsync(PendingOrder pendingOrder, double targetPrice, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expirationTime, double volume, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod? stopOrderTriggerMethod, double? stopLimitRangePips, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	Pending Order to modify
+targetPrice	double	New target price at which the order becomes market order
+stopLoss	double?	New Stop loss
+takeProfit	double?	New Take profit
+protectionType	ProtectionType?	New Protection type
+expirationTime	DateTime?	New expiry date and time
+volume	double	New volume in units for the order
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+stopOrderTriggerMethod	StopTriggerMethod?	Determines how pending order will be triggered in case it's a StopOrder
+stopLimitRangePips	double?	Maximum distance for order execution from target price
+callback	Action	Method that is called when order is modified
+Return Value
+
+TradeOperation
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+ foreach (var order in PendingOrders)
+ {
+     if (order.StopLossPips == null)
+         ModifyPendingOrderAsync(order, order.TargetPrice, 10, order.TakeProfitPips, ProtectionType.Relative,
+                         order.ExpirationTime);
+ }
+
+ModifyPendingOrderAsync (10 of 18)
+
+Signature
+
+public TradeOperation ModifyPendingOrderAsync(PendingOrder pendingOrder, long volume, double targetPrice, double? stopLossPips, double? takeProfitPips, DateTime? expirationTime, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	
+volume	long	
+targetPrice	double	
+stopLossPips	double?	
+takeProfitPips	double?	
+expirationTime	DateTime?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ModifyPendingOrderAsync (11 of 18)
+
+Signature
+
+public TradeOperation ModifyPendingOrderAsync(PendingOrder pendingOrder, double targetPrice, double? stopLossPips, double? takeProfitPips, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	
+targetPrice	double	
+stopLossPips	double?	
+takeProfitPips	double?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ModifyPendingOrderAsync (12 of 18)
+
+Signature
+
+public TradeOperation ModifyPendingOrderAsync(PendingOrder pendingOrder, double targetPrice, double? stopLossPips, double? takeProfitPips, DateTime? expirationTime, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	
+targetPrice	double	
+stopLossPips	double?	
+takeProfitPips	double?	
+expirationTime	DateTime?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ModifyPendingOrderAsync (13 of 18)
+
+Signature
+
+public TradeOperation ModifyPendingOrderAsync(PendingOrder pendingOrder, double targetPrice, double? stopLossPips, double? takeProfitPips, DateTime? expirationTime, long volume, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	
+targetPrice	double	
+stopLossPips	double?	
+takeProfitPips	double?	
+expirationTime	DateTime?	
+volume	long	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ModifyPendingOrderAsync (14 of 18)
+
+Signature
+
+public TradeOperation ModifyPendingOrderAsync(PendingOrder pendingOrder, double targetPrice, double? stopLossPips, double? takeProfitPips, DateTime? expirationTime, double volume, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	
+targetPrice	double	
+stopLossPips	double?	
+takeProfitPips	double?	
+expirationTime	DateTime?	
+volume	double	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ModifyPendingOrderAsync (15 of 18)
+
+Signature
+
+public TradeOperation ModifyPendingOrderAsync(PendingOrder pendingOrder, double targetPrice, double? stopLossPips, double? takeProfitPips, DateTime? expirationTime, double volume, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod? stopOrderTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	
+targetPrice	double	
+stopLossPips	double?	
+takeProfitPips	double?	
+expirationTime	DateTime?	
+volume	double	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+stopOrderTriggerMethod	StopTriggerMethod?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ModifyPendingOrderAsync (16 of 18)
+
+Signature
+
+public TradeOperation ModifyPendingOrderAsync(PendingOrder pendingOrder, double targetPrice, double? stopLossPips, double? takeProfitPips, DateTime? expirationTime, double volume, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	
+targetPrice	double	
+stopLossPips	double?	
+takeProfitPips	double?	
+expirationTime	DateTime?	
+volume	double	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ModifyPendingOrderAsync (17 of 18)
+
+Signature
+
+public TradeOperation ModifyPendingOrderAsync(PendingOrder pendingOrder, double targetPrice, double? stopLossPips, double? takeProfitPips, DateTime? expirationTime, double volume, bool hasTrailingStop, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	
+targetPrice	double	
+stopLossPips	double?	
+takeProfitPips	double?	
+expirationTime	DateTime?	
+volume	double	
+hasTrailingStop	bool	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ModifyPendingOrderAsync (18 of 18)
+
+Signature
+
+public TradeOperation ModifyPendingOrderAsync(PendingOrder pendingOrder, double targetPrice, double? stopLossPips, double? takeProfitPips, DateTime? expirationTime, double volume, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod? stopOrderTriggerMethod, double? stopLimitRangePips, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+pendingOrder	PendingOrder	
+targetPrice	double	
+stopLossPips	double?	
+takeProfitPips	double?	
+expirationTime	DateTime?	
+volume	double	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+stopOrderTriggerMethod	StopTriggerMethod?	
+stopLimitRangePips	double?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ReversePosition (2)¶
+ReversePosition (1 of 2)
+
+Summary
+
+Modify the direction of trade at position
+
+Signature
+
+public TradeResult ReversePosition(Position position)
+Parameters
+
+Name	Type	Description
+position	Position	Position which is affected
+Return Value
+
+TradeResult
+
+Examples
+
+ var position = Positions.Find("myLabel", Symbol, TradeType.Buy);
+ if (position != null )
+ {
+     ReversePosition(position);
+ }
+ReversePosition (2 of 2)
+
+Summary
+
+Modify the direction of trade and volume of a position
+
+Signature
+
+public TradeResult ReversePosition(Position position, double volume)
+Parameters
+
+Name	Type	Description
+position	Position	Position which is affected
+volume	double	Volume (in units) of Trade
+Return Value
+
+TradeResult
+
+Examples
+
+ var position = Positions.Find("myLabel", Symbol, TradeType.Buy);
+ if (position != null )
+ {
+     ReversePosition(position, 20000);
+ }
+ModifyPosition (7)¶
+ModifyPosition (1 of 7)
+
+Summary
+
+Modify the volume of a position
+
+Signature
+
+public TradeResult ModifyPosition(Position position, double volume)
+Parameters
+
+Name	Type	Description
+position	Position	Position which is affected
+volume	double	Volume (in units) of Trade
+Return Value
+
+TradeResult
+
+Examples
+
+ var position = Positions.Find("myLabel", Symbol, TradeType.Buy);
+ if (position != null )
+ {
+     ModifyPosition(position, 20000);
+ }
+ModifyPosition (2 of 7)
+
+Summary
+
+Modify the protection of a position
+
+Signature
+
+public TradeResult ModifyPosition(Position position, double? stopLoss, double? takeProfit, ProtectionType? protectionType)
+Parameters
+
+Name	Type	Description
+position	Position	Position which is affected
+stopLoss	double?	New stop loss
+takeProfit	double?	New take profit
+protectionType	ProtectionType?	Protection type
+Return Value
+
+TradeResult
+
+Examples
+
+ var position = Positions.Find("myLabel", Symbol, TradeType.Buy);
+ if (position != null )
+ {
+     double? stopLoss = Symbol.Ask- 10*Symbol.PipSize;
+     double? takeProfit = Symbol.Ask + 10 * Symbol.PipSize;
+     ModifyPosition(position, stopLoss,  takeProfit);
+ }
+ModifyPosition (3 of 7)
+
+Summary
+
+Modify the protection of a position
+
+Signature
+
+public TradeResult ModifyPosition(Position position, double? stopLoss, double? takeProfit, ProtectionType? protectionType, bool hasTrailingStop)
+Parameters
+
+Name	Type	Description
+position	Position	Position which is affected
+stopLoss	double?	New stop loss
+takeProfit	double?	New take profit
+protectionType	ProtectionType?	Protection type
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+ var position = Positions.Find("myLabel", Symbol, TradeType.Buy);
+ if (position != null )
+ {
+     double? stopLoss = Symbol.Ask- 10*Symbol.PipSize;
+     double? takeProfit = Symbol.Ask + 10 * Symbol.PipSize;
+     ModifyPosition(position, stopLoss,  takeProfit);
+ }
+
+ModifyPosition (4 of 7)
+
+Summary
+
+Modify the protection of a position
+
+Signature
+
+public TradeResult ModifyPosition(Position position, double? stopLoss, double? takeProfit, ProtectionType? protectionType, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod)
+Parameters
+
+Name	Type	Description
+position	Position	Position which is affected
+stopLoss	double?	New stop loss
+takeProfit	double?	New take profit
+protectionType	ProtectionType?	Protection type
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+ var position = Positions.Find("myLabel", Symbol, TradeType.Buy);
+ if (position != null )
+ {
+     double? stopLoss = Symbol.Ask- 10*Symbol.PipSize;
+     double? takeProfit = Symbol.Ask + 10 * Symbol.PipSize;
+     ModifyPosition(position, stopLoss,  takeProfit);
+ }
+
+ModifyPosition (5 of 7)
+
+Summary
+
+Modify Position in asynchronous execution mode
+
+Signature
+
+public TradeResult ModifyPosition(Position position, double? stopLoss, double? takeProfit)
+Parameters
+
+Name	Type	Description
+position	Position	Position to modify
+stopLoss	double?	
+takeProfit	double?	
+Return Value
+
+TradeResult
+
+Examples
+
+ var position = Positions.Find("myLabel", Symbol, TradeType.Buy);
+ if (position != null)
+ {
+     ModifyPositionAsync(position, 20000);
+ }
+ModifyPosition (6 of 7)
+
+Summary
+
+Modify Position in asynchronous execution mode
+
+Signature
+
+public TradeResult ModifyPosition(Position position, double? stopLoss, double? takeProfit, bool hasTrailingStop)
+Parameters
+
+Name	Type	Description
+position	Position	Position to modify
+stopLoss	double?	New stop loss
+takeProfit	double?	New take profit
+hasTrailingStop	bool	
+Return Value
+
+TradeResult
+
+Examples
+
+ var position = Positions.Find("myLabel", Symbol, TradeType.Buy);
+ if (position != null)
+ {
+     double? stopLoss = Symbol.Ask- 10*Symbol.PipSize;
+     double? takeProfit = Symbol.Ask + 10 * Symbol.PipSize;
+     ModifyPositionAsync(position, stopLoss,  takeProfit);
+ }
+ModifyPosition (7 of 7)
+
+Summary
+
+Modify Position in asynchronous execution mode
+
+Signature
+
+public TradeResult ModifyPosition(Position position, double? stopLoss, double? takeProfit, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod)
+Parameters
+
+Name	Type	Description
+position	Position	Position to modify
+stopLoss	double?	New stop loss price
+takeProfit	double?	New take profit price
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+ var position = Positions.Find("myLabel", Symbol, TradeType.Buy);
+ if (position != null)
+ {
+     double? stopLoss = Symbol.Ask- 10*Symbol.PipSize;
+     double? takeProfit = Symbol.Ask + 10 * Symbol.PipSize;
+     ModifyPositionAsync(position, stopLoss,  takeProfit);
+ }
+
+ClosePosition (3)¶
+ClosePosition (1 of 3)
+
+Summary
+
+Close a position
+
+Signature
+
+public TradeResult ClosePosition(Position position)
+Parameters
+
+Name	Type	Description
+position	Position	Position to close
+Return Value
+
+TradeResult
+
+ClosePosition (2 of 3)
+
+Summary
+
+Close a position
+
+Signature
+
+public TradeResult ClosePosition(Position position, long volume)
+Parameters
+
+Name	Type	Description
+position	Position	Position to close
+volume	long	Volume which is closed
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+ ClosePosition(position);
+
+ClosePosition (3 of 3)
+
+Summary
+
+Close a position
+
+Signature
+
+public TradeResult ClosePosition(Position position, double volume)
+Parameters
+
+Name	Type	Description
+position	Position	Position to close
+volume	double	Volume which is closed
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+ ClosePosition(position);
+
+ClosePositionAsync (3)¶
+ClosePositionAsync (1 of 3)
+
+Summary
+
+Close a position in asynchronous execution mode
+
+Signature
+
+public TradeOperation ClosePositionAsync(Position position, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+position	Position	The position to close
+callback	Action	The action when the position closes
+Return Value
+
+TradeOperation
+
+ClosePositionAsync (2 of 3)
+
+Summary
+
+Close a position in asynchronous execution mode
+
+Signature
+
+public TradeOperation ClosePositionAsync(Position position, long volume, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+position	Position	The position to close
+volume	long	The volume to close
+callback	Action	The action when the position closes
+Return Value
+
+TradeOperation
+
+Examples
+
+
+Example 1
+Example 2
+ ClosePositionAsync(position);
+
+ClosePositionAsync (3 of 3)
+
+Summary
+
+Close a position in asynchronous execution mode
+
+Signature
+
+public TradeOperation ClosePositionAsync(Position position, double volume, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+position	Position	The position to close
+volume	double	The volume to close
+callback	Action	The action when the position closes
+Return Value
+
+TradeOperation
+
+Examples
+
+
+Example 1
+Example 2
+ ClosePositionAsync(position);
+
+ReversePositionAsync (2)¶
+ReversePositionAsync (1 of 2)
+
+Summary
+
+Modify Position in asynchronous execution mode
+
+Signature
+
+public TradeOperation ReversePositionAsync(Position position, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+position	Position	Position to modify
+callback	Action	Method that is called when position is modified
+Return Value
+
+TradeOperation
+
+Examples
+
+ var position = Positions.Find("myLabel", Symbol, TradeType.Buy);
+ if (position != null)
+ {
+     ReversePositionAsync(position, TradeType.Sell);
+ }
+ReversePositionAsync (2 of 2)
+
+Summary
+
+Modify Position in asynchronous execution mode
+
+Signature
+
+public TradeOperation ReversePositionAsync(Position position, double volume, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+position	Position	Position to modify
+volume	double	New volume
+callback	Action	Method that is called when position is modified
+Return Value
+
+TradeOperation
+
+Examples
+
+ var position = Positions.Find("myLabel", Symbol, TradeType.Buy);
+ if (position != null)
+ {
+     ReversePositionAsync(position, 20000);
+ }
+ModifyPositionAsync (7)¶
+ModifyPositionAsync (1 of 7)
+
+Summary
+
+Modify Position in asynchronous execution mode
+
+Signature
+
+public TradeOperation ModifyPositionAsync(Position position, double volume, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+position	Position	Position to modify
+volume	double	New volume
+callback	Action	Method that is called when position is modified
+Return Value
+
+TradeOperation
+
+Examples
+
+ var position = Positions.Find("myLabel", Symbol, TradeType.Buy);
+ if (position != null)
+ {
+     ModifyPositionAsync(position, 20000);
+ }
+ModifyPositionAsync (2 of 7)
+
+Summary
+
+Modify Position in asynchronous execution mode
+
+Signature
+
+public TradeOperation ModifyPositionAsync(Position position, double? stopLoss, double? takeProfit, ProtectionType? protectionType, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+position	Position	Position to modify
+stopLoss	double?	New stop loss
+takeProfit	double?	New take profit
+protectionType	ProtectionType?	New protection type
+callback	Action	Method that is called when position is modified
+Return Value
+
+TradeOperation
+
+Examples
+
+ var position = Positions.Find("myLabel", Symbol, TradeType.Buy);
+ if (position != null)
+ {
+     double? stopLoss = Symbol.Ask- 10*Symbol.PipSize;
+     double? takeProfit = Symbol.Ask + 10 * Symbol.PipSize;
+     ModifyPositionAsync(position, stopLoss,  takeProfit);
+ }
+ModifyPositionAsync (3 of 7)
+
+Summary
+
+Modify Position in asynchronous execution mode
+
+Signature
+
+public TradeOperation ModifyPositionAsync(Position position, double? stopLoss, double? takeProfit, ProtectionType? protectionType, bool hasTrailingStop, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+position	Position	Position to modify
+stopLoss	double?	New stop loss price
+takeProfit	double?	New take profit price
+protectionType	ProtectionType?	New protection type
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+callback	Action	Method that is called when position is modified
+Return Value
+
+TradeOperation
+
+Examples
+
+
+Example 1
+Example 2
+ var position = Positions.Find("myLabel", Symbol, TradeType.Buy);
+ if (position != null)
+ {
+     double? stopLoss = Symbol.Ask- 10*Symbol.PipSize;
+     double? takeProfit = Symbol.Ask + 10 * Symbol.PipSize;
+     ModifyPositionAsync(position, stopLoss,  takeProfit);
+ }
+
+ModifyPositionAsync (4 of 7)
+
+Summary
+
+Modify Position in asynchronous execution mode
+
+Signature
+
+public TradeOperation ModifyPositionAsync(Position position, double? stopLoss, double? takeProfit, ProtectionType? protectionType, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+position	Position	Position to modify
+stopLoss	double?	New stop loss
+takeProfit	double?	New take profit
+protectionType	ProtectionType?	New protection type
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+callback	Action	Method that is called when position is modified
+Return Value
+
+TradeOperation
+
+Examples
+
+
+Example 1
+Example 2
+ var position = Positions.Find("myLabel", Symbol, TradeType.Buy);
+ if (position != null)
+ {
+     double? stopLoss = Symbol.Ask- 10*Symbol.PipSize;
+     double? takeProfit = Symbol.Ask + 10 * Symbol.PipSize;
+     ModifyPositionAsync(position, stopLoss,  takeProfit);
+ }
+
+ModifyPositionAsync (5 of 7)
+
+Signature
+
+public TradeOperation ModifyPositionAsync(Position position, double? stopLoss, double? takeProfit, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+position	Position	
+stopLoss	double?	
+takeProfit	double?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ModifyPositionAsync (6 of 7)
+
+Signature
+
+public TradeOperation ModifyPositionAsync(Position position, double? stopLoss, double? takeProfit, bool hasTrailingStop, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+position	Position	
+stopLoss	double?	
+takeProfit	double?	
+hasTrailingStop	bool	
+callback	Action	
+Return Value
+
+TradeOperation
+
+ModifyPositionAsync (7 of 7)
+
+Signature
+
+public TradeOperation ModifyPositionAsync(Position position, double? stopLoss, double? takeProfit, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+position	Position	
+stopLoss	double?	
+takeProfit	double?	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrder (22)¶
+PlaceStopLimitOrder (1 of 22)
+
+Summary
+
+Place a Stop Limit Order
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (2 of 22)
+
+Summary
+
+Place a Stop Limit Order
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (3 of 22)
+
+Summary
+
+Place a Stop Limit Order
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (4 of 22)
+
+Summary
+
+Place a Stop Limit Order
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry date and time
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (5 of 22)
+
+Summary
+
+Place a Stop Limit Order
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry date and time
+comment	string	Order comment
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (6 of 22)
+
+Summary
+
+Place a Stop Limit Order
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment, bool hasTrailingStop)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry date and time
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (7 of 22)
+
+Summary
+
+Place a Stop Limit Order
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry date and time
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (8 of 22)
+
+Summary
+
+Place a Stop Limit Order
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod stopOrderTriggerMethod)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry date and time
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+stopOrderTriggerMethod	StopTriggerMethod	Determines how pending order will be triggered in case it's a StopLimitOrder
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (9 of 22)
+
+Summary
+
+Place Stop Limit order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, double stopLimitRangePips)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (10 of 22)
+
+Summary
+
+Place Stop Limit order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, double stopLimitRangePips, string label)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (11 of 22)
+
+Summary
+
+Place Stop Limit order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+stopLossPips	double?	
+takeProfitPips	double?	
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (12 of 22)
+
+Summary
+
+Place Stop Limit order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	Order expiry date and time
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (13 of 22)
+
+Summary
+
+Place Stop Limit order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	Order expiry date and time
+comment	string	Order comment
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (14 of 22)
+
+Summary
+
+Place Stop Limit order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	Order expiry date and time
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (15 of 22)
+
+Summary
+
+Place Stop Limit order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	Order expiry date and time
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (16 of 22)
+
+Summary
+
+Place Stop Limit order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod stopOrderTriggerMethod)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	Order expiry date and time
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+stopOrderTriggerMethod	StopTriggerMethod	Determines how pending order will be triggered in case it's a StopLimitOrder
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (17 of 22)
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (18 of 22)
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (19 of 22)
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (20 of 22)
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (21 of 22)
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrder (22 of 22)
+
+Signature
+
+public TradeResult PlaceStopLimitOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod stopOrderTriggerMethod)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+stopOrderTriggerMethod	StopTriggerMethod	
+Return Value
+
+TradeResult
+
+PlaceStopLimitOrderAsync (22)¶
+PlaceStopLimitOrderAsync (1 of 22)
+
+Summary
+
+Place Stop Limit order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+callback	Action	Action when order is placed
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (2 of 22)
+
+Summary
+
+Place Stop Limit order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+callback	Action	Action when order is placed
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (3 of 22)
+
+Summary
+
+Place Stop Limit order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+callback	Action	Action when order is placed
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (4 of 22)
+
+Summary
+
+Place Stop Limit order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry date and time
+callback	Action	Action when order is placed
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (5 of 22)
+
+Summary
+
+Place Stop Limit order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry date and time
+comment	string	Order comment
+callback	Action	Action when order is placed
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (6 of 22)
+
+Summary
+
+Place Stop Limit order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment, bool hasTrailingStop, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry date and time
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+callback	Action	Action when order is placed
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (7 of 22)
+
+Summary
+
+Place Stop Limit order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry date and time
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+callback	Action	Action when order is placed
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (8 of 22)
+
+Summary
+
+Place Stop Limit order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod stopOrderTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price (or better) at which order is filled
+stopLimitRangePips	double	Maximum distance for order execution from target price
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry date and time
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+stopOrderTriggerMethod	StopTriggerMethod	Determines how pending order will be triggered in case it's a StopLimitOrder
+callback	Action	Action when order is placed
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (9 of 22)
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, double stopLimitRangePips, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (10 of 22)
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, double stopLimitRangePips, string label, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+label	string	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (11 of 22)
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (12 of 22)
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (13 of 22)
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (14 of 22)
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (15 of 22)
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (16 of 22)
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod stopOrderTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+stopOrderTriggerMethod	StopTriggerMethod	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (17 of 22)
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (18 of 22)
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (19 of 22)
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (20 of 22)
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (21 of 22)
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopLimitOrderAsync (22 of 22)
+
+Signature
+
+public TradeOperation PlaceStopLimitOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, double stopLimitRangePips, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod stopOrderTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+stopLimitRangePips	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+stopOrderTriggerMethod	StopTriggerMethod	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopOrder (27)¶
+PlaceStopOrder (1 of 27)
+
+Summary
+
+Place a stop order
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, string symbolName, double volume, double targetPrice)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price at which order becomes a market order
+Return Value
+
+TradeResult
+
+PlaceStopOrder (2 of 27)
+
+Summary
+
+Place a stop order
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price at which order becomes a market order
+label	string	Representing label
+Return Value
+
+TradeResult
+
+PlaceStopOrder (3 of 27)
+
+Summary
+
+Place a stop order
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price at which order becomes a market order
+label	string	Representing label
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+Return Value
+
+TradeResult
+
+PlaceStopOrder (4 of 27)
+
+Summary
+
+Place a stop order
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price at which order becomes a market order
+label	string	Representing label
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry time
+Return Value
+
+TradeResult
+
+PlaceStopOrder (5 of 27)
+
+Summary
+
+Place a stop order
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price at which order becomes a market order
+label	string	Representing label
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry time
+comment	string	Order comment
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+ PlaceStopOrder(TradeType.Buy, Symbol, 10000, Symbol.Ask);
+
+PlaceStopOrder (6 of 27)
+
+Summary
+
+Place a stop order
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment, bool hasTrailingStop)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price at which order becomes a market order
+label	string	Representing label
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry time
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+ PlaceStopOrder(TradeType.Buy, Symbol, 10000, Symbol.Ask);
+
+PlaceStopOrder (7 of 27)
+
+Summary
+
+Place a stop order
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price at which order becomes a market order
+label	string	Representing label
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry time
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+Example 7
+ PlaceStopOrder(TradeType.Buy, Symbol, 10000, Symbol.Ask);
+
+PlaceStopOrder (8 of 27)
+
+Summary
+
+Place a stop order
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod stopOrderTriggerMethod)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume (in units) of trade
+targetPrice	double	Price at which order becomes a market order
+label	string	Representing label
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry time
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+stopOrderTriggerMethod	StopTriggerMethod	Determines how pending order will be triggered in case it's a StopOrder
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+Example 7
+ PlaceStopOrder(TradeType.Buy, Symbol, 10000, Symbol.Ask);
+
+PlaceStopOrder (9 of 27)
+
+Summary
+
+Place stop order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, Symbol symbol, long volume, double targetPrice)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	long	Volume of trade
+targetPrice	double	Price at which the order becomes market order
+Return Value
+
+TradeResult
+
+PlaceStopOrder (10 of 27)
+
+Summary
+
+Place stop order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	double	Volume of trade
+targetPrice	double	Price at which the order becomes market order
+Return Value
+
+TradeResult
+
+PlaceStopOrder (11 of 27)
+
+Summary
+
+Place stop order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, Symbol symbol, long volume, double targetPrice, string label)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	long	Volume of trade
+targetPrice	double	Price at which the order becomes market order
+label	string	Label representing the order
+Return Value
+
+TradeResult
+
+PlaceStopOrder (12 of 27)
+
+Summary
+
+Place stop order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	double	Volume of trade
+targetPrice	double	Price at which the order becomes market order
+label	string	Label representing the order
+Return Value
+
+TradeResult
+
+PlaceStopOrder (13 of 27)
+
+Summary
+
+Place stop order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, Symbol symbol, long volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	long	Volume of trade
+targetPrice	double	Price at which the order becomes market order
+label	string	Label representing the order
+stopLossPips	double?	
+takeProfitPips	double?	
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+ PlaceStopOrderAsync(TradeType.Sell, Symbol, 10000, Symbol.Bid - 5* Symbol.PipSize);
+
+PlaceStopOrder (14 of 27)
+
+Summary
+
+Place stop order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	double	Volume of trade
+targetPrice	double	Price at which the order becomes market order
+label	string	Label representing the order
+stopLossPips	double?	
+takeProfitPips	double?	
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+ PlaceStopOrderAsync(TradeType.Sell, Symbol, 10000, Symbol.Bid - 5* Symbol.PipSize);
+
+PlaceStopOrder (15 of 27)
+
+Summary
+
+Place stop order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, Symbol symbol, long volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	long	Volume of trade
+targetPrice	double	Price at which the order becomes market order
+label	string	Label representing the order
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	Order expiry date and time
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+ PlaceStopOrderAsync(TradeType.Sell, Symbol, 10000, Symbol.Bid - 5* Symbol.PipSize);
+
+PlaceStopOrder (16 of 27)
+
+Summary
+
+Place stop order in asynchronous execution mode
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbol	Symbol	
+volume	double	Volume of trade
+targetPrice	double	Price at which the order becomes market order
+label	string	Label representing the order
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	Order expiry date and time
+Return Value
+
+TradeResult
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+Example 7
+ PlaceStopOrderAsync(TradeType.Sell, Symbol, 10000, Symbol.Bid - 5* Symbol.PipSize);
+
+PlaceStopOrder (17 of 27)
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, Symbol symbol, long volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	long	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+Return Value
+
+TradeResult
+
+PlaceStopOrder (18 of 27)
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+Return Value
+
+TradeResult
+
+PlaceStopOrder (19 of 27)
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+Return Value
+
+TradeResult
+
+PlaceStopOrder (20 of 27)
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+Return Value
+
+TradeResult
+
+PlaceStopOrder (21 of 27)
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod stopOrderTriggerMethod)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+stopOrderTriggerMethod	StopTriggerMethod	
+Return Value
+
+TradeResult
+
+PlaceStopOrder (22 of 27)
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+Return Value
+
+TradeResult
+
+PlaceStopOrder (23 of 27)
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+Return Value
+
+TradeResult
+
+PlaceStopOrder (24 of 27)
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+Return Value
+
+TradeResult
+
+PlaceStopOrder (25 of 27)
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+Return Value
+
+TradeResult
+
+PlaceStopOrder (26 of 27)
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+Return Value
+
+TradeResult
+
+PlaceStopOrder (27 of 27)
+
+Signature
+
+public TradeResult PlaceStopOrder(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod stopOrderTriggerMethod)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+stopOrderTriggerMethod	StopTriggerMethod	
+Return Value
+
+TradeResult
+
+PlaceStopOrderAsync (27)¶
+PlaceStopOrderAsync (1 of 27)
+
+Summary
+
+Place stop order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume of trade
+targetPrice	double	Price at which the order becomes market order
+callback	Action	Action when order is placed
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (2 of 27)
+
+Summary
+
+Place stop order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume of trade
+targetPrice	double	Price at which the order becomes market order
+label	string	Label representing the order
+callback	Action	Action when order is placed
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (3 of 27)
+
+Summary
+
+Place stop order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume of trade
+targetPrice	double	Price at which the order becomes market order
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+callback	Action	Action when order is placed
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (4 of 27)
+
+Summary
+
+Place stop order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume of trade
+targetPrice	double	Price at which the order becomes market order
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry date and time
+callback	Action	Action when order is placed
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (5 of 27)
+
+Summary
+
+Place stop order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume of trade
+targetPrice	double	Price at which the order becomes market order
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry date and time
+comment	string	Order comment
+callback	Action	Action when order is placed
+Return Value
+
+TradeOperation
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+ PlaceStopOrderAsync(TradeType.Sell, Symbol, 10000, Symbol.Bid - 5* Symbol.PipSize);
+
+PlaceStopOrderAsync (6 of 27)
+
+Summary
+
+Place stop order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment, bool hasTrailingStop, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume of trade
+targetPrice	double	Price at which the order becomes market order
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry date and time
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+callback	Action	Action when order is placed
+Return Value
+
+TradeOperation
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+ PlaceStopOrderAsync(TradeType.Sell, Symbol, 10000, Symbol.Bid - 5* Symbol.PipSize);
+
+PlaceStopOrderAsync (7 of 27)
+
+Summary
+
+Place stop order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume of trade
+targetPrice	double	Price at which the order becomes market order
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry date and time
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+callback	Action	Action when order is placed
+Return Value
+
+TradeOperation
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+ PlaceStopOrderAsync(TradeType.Sell, Symbol, 10000, Symbol.Bid - 5* Symbol.PipSize);
+
+PlaceStopOrderAsync (8 of 27)
+
+Summary
+
+Place stop order in asynchronous execution mode
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLoss, double? takeProfit, ProtectionType? protectionType, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod stopOrderTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	Direction of trade
+symbolName	string	Symbol name of trade
+volume	double	Volume of trade
+targetPrice	double	Price at which the order becomes market order
+label	string	Label representing the order
+stopLoss	double?	Stop loss
+takeProfit	double?	Take profit
+protectionType	ProtectionType?	Protection type
+expiration	DateTime?	Order expiry date and time
+comment	string	Order comment
+hasTrailingStop	bool	Enable/disable TrailingStop for position
+stopLossTriggerMethod	StopTriggerMethod?	Trigger method for position's StopLoss
+stopOrderTriggerMethod	StopTriggerMethod	Determines how pending order will be triggered in case it's a StopOrder
+callback	Action	Action when order is placed
+Return Value
+
+TradeOperation
+
+Examples
+
+
+Example 1
+Example 2
+Example 3
+Example 4
+Example 5
+Example 6
+Example 7
+ PlaceStopOrderAsync(TradeType.Sell, Symbol, 10000, Symbol.Bid - 5* Symbol.PipSize);
+
+PlaceStopOrderAsync (9 of 27)
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, Symbol symbol, long volume, double targetPrice, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	long	
+targetPrice	double	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (10 of 27)
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (11 of 27)
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, Symbol symbol, long volume, double targetPrice, string label, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	long	
+targetPrice	double	
+label	string	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (12 of 27)
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (13 of 27)
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, Symbol symbol, long volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	long	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (14 of 27)
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (15 of 27)
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, Symbol symbol, long volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	long	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (16 of 27)
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (17 of 27)
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, Symbol symbol, long volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	long	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (18 of 27)
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (19 of 27)
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (20 of 27)
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (21 of 27)
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, Symbol symbol, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod stopOrderTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbol	Symbol	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+stopOrderTriggerMethod	StopTriggerMethod	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (22 of 27)
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (23 of 27)
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (24 of 27)
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (25 of 27)
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (26 of 27)
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+callback	Action	
+Return Value
+
+TradeOperation
+
+PlaceStopOrderAsync (27 of 27)
+
+Signature
+
+public TradeOperation PlaceStopOrderAsync(TradeType tradeType, string symbolName, double volume, double targetPrice, string label, double? stopLossPips, double? takeProfitPips, DateTime? expiration, string comment, bool hasTrailingStop, StopTriggerMethod? stopLossTriggerMethod, StopTriggerMethod stopOrderTriggerMethod, Action<TradeResult> callback)
+Parameters
+
+Name	Type	Description
+tradeType	TradeType	
+symbolName	string	
+volume	double	
+targetPrice	double	
+label	string	
+stopLossPips	double?	
+takeProfitPips	double?	
+expiration	DateTime?	
+comment	string	
+hasTrailingStop	bool	
+stopLossTriggerMethod	StopTriggerMethod?	
+stopOrderTriggerMethod	StopTriggerMethod	
+callback	Action	
+Return Value
+
+TradeOperation
+
+Properties¶
+Account¶
+Summary
+
+Contains all Account information
+
+Signature
+
+public IAccount Account {get;}
+Return Value
+
+IAccount
+
+Examples
+
+ double balance = Account.Balance;
+ string currency = Account.Currency;
+    double equity = Account.Equity;
+    double freemargin = Account.FreeMargin;
+    double margin = Account.Margin;
+    double? marginlevel = Account.MarginLevel;
+ int leverage = Account.Leverage;
+LastResult¶
+Summary
+
+The latest trade result
+
+Signature
+
+public TradeResult LastResult {get;}
+Return Value
+
+TradeResult
+
+Examples
+
+ ExecuteMarketOrder(TradeType.Buy, Symbol, 20000, null, 10, null);
+ if(LastResult.IsSuccessful)
+     Print(LastResult.Position.StopLoss);
+Trade¶
+Signature
+
+public ITrade Trade {get;}
+Return Value
+
+ITrade
+
+January 3, 2025
+ Back to top
+Copyright © 2025 Spotware Systems Ltd. cTrader, cAlgo, cBroker, cMirror. All rights reserved.
